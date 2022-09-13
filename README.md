@@ -2,6 +2,7 @@
 This repository contains the  notes from the standord cs 230 autum class
 
 The class was in the format of the flip in which the students were asked to watch the content of the deep learning on the coursera and in the class the time was utilesed for the discussion for the boarder prospective
+#Deeplearing # MachineLearning #Stanford
 
 
 
