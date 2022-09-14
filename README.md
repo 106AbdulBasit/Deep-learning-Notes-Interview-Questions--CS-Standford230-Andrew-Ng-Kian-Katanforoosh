@@ -22,6 +22,25 @@ In this vedio  Sir Andrew talk about
 The lecture note which are from the Youtube video can be found here in this [link](https://github.com/106AbdulBasit/Deep-learning-Notes-Interview-Questions--CS-Standford230-Andrew-Ng-Kian-Katanforoosh/blob/main/Cs230-Standford%20Lecture's%20Notes/Lec1.md)
 
 
+# Lecture 2
+
+The topics from the Neural Network Deep learning Week 2
+
+- [Binary Classification](https://github.com/106AbdulBasit/Deep-learning-Notes-Interview-Questions--CS-Standford230-Andrew-Ng-Kian-Katanforoosh/blob/main/Neural%20Network%20%26%20Deep%20Learning/Week%202.md)
+- [Logistic Regression](https://github.com/106AbdulBasit/Deep-learning-Notes-Interview-Questions--CS-Standford230-Andrew-Ng-Kian-Katanforoosh/blob/main/Neural%20Network%20%26%20Deep%20Learning/Week%202.md)
+- [Difference between Linear regression and logistic regression.](https://github.com/106AbdulBasit/Deep-learning-Notes-Interview-Questions--CS-Standford230-Andrew-Ng-Kian-Katanforoosh/blob/main/Neural%20Network%20%26%20Deep%20Learning/Week%202.md)
+- [logistic regression cost function.](https://github.com/106AbdulBasit/Deep-learning-Notes-Interview-Questions--CS-Standford230-Andrew-Ng-Kian-Katanforoosh/blob/main/Neural%20Network%20%26%20Deep%20Learning/Week%202.md)
+- [What is the differnce between cost function and loss function?](https://github.com/106AbdulBasit/Deep-learning-Notes-Interview-Questions--CS-Standford230-Andrew-Ng-Kian-Katanforoosh/blob/main/Neural%20Network%20%26%20Deep%20Learning/Week%202.md)
+- [Gradient Descent.](https://github.com/106AbdulBasit/Deep-learning-Notes-Interview-Questions--CS-Standford230-Andrew-Ng-Kian-Katanforoosh/blob/main/Neural%20Network%20%26%20Deep%20Learning/Week%202.md)
+- [Derivatives](https://github.com/106AbdulBasit/Deep-learning-Notes-Interview-Questions--CS-Standford230-Andrew-Ng-Kian-Katanforoosh/blob/main/Neural%20Network%20%26%20Deep%20Learning/Week%202.md)
+- [Computation Graph](https://github.com/106AbdulBasit/Deep-learning-Notes-Interview-Questions--CS-Standford230-Andrew-Ng-Kian-Katanforoosh/blob/main/Neural%20Network%20%26%20Deep%20Learning/Week%202.md)
+- [Computing Derivatives](https://github.com/106AbdulBasit/Deep-learning-Notes-Interview-Questions--CS-Standford230-Andrew-Ng-Kian-Katanforoosh/blob/main/Neural%20Network%20%26%20Deep%20Learning/Week%202.md)
+- [logistic Regression Derivatives](https://github.com/106AbdulBasit/Deep-learning-Notes-Interview-Questions--CS-Standford230-Andrew-Ng-Kian-Katanforoosh/blob/main/Neural%20Network%20%26%20Deep%20Learning/Week%202.md)
+- [logistic Regression on M examples](https://github.com/106AbdulBasit/Deep-learning-Notes-Interview-Questions--CS-Standford230-Andrew-Ng-Kian-Katanforoosh/blob/main/Neural%20Network%20%26%20Deep%20Learning/Week%202.md)
+- [Vectorization](https://github.com/106AbdulBasit/Deep-learning-Notes-Interview-Questions--CS-Standford230-Andrew-Ng-Kian-Katanforoosh/blob/main/Neural%20Network%20%26%20Deep%20Learning/Week%202.md)
+
+
+
 
 
  
