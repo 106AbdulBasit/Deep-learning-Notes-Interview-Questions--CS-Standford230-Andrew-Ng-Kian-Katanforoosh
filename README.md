@@ -10,21 +10,19 @@ The class was in the format of the flip in which the students were asked to watc
 The lecture one contains the content from the week1 of the Nueral Network and deep learning
 
 Week 1
-- Neural Network
-- Supervised Learning
+- [Neural Network](https://github.com/106AbdulBasit/Deep-learning-Notes-Interview-Questions--CS-Standford230-Andrew-Ng-Kian-Katanforoosh/blob/main/Neural%20Network%20&%20Deep%20Learning/Week%201.md)
+- [Supervised Learning](https://github.com/106AbdulBasit/Deep-learning-Notes-Interview-Questions--CS-Standford230-Andrew-Ng-Kian-Katanforoosh/blob/main/Neural%20Network%20&%20Deep%20Learning/Week%201.md)
 
-The details notes can be found in this [link](https://github.com/106AbdulBasit/Deep-learning-Notes-Interview-Questions--CS-Standford230-Andrew-Ng-Kian-Katanforoosh/blob/main/Neural%20Network%20&%20Deep%20Learning/Week%201.md)
 
-In this vedio  Sir Andrew talk about
-- why deep learning is taking off?
-- What is difference between SE and DL.
+**In the class room  Sir Andrew ng discuss  about these things.**
 
-The lecture note which are from the Youtube video can be found here in this [link](https://github.com/106AbdulBasit/Deep-learning-Notes-Interview-Questions--CS-Standford230-Andrew-Ng-Kian-Katanforoosh/blob/main/Cs230-Standford%20Lecture's%20Notes/Lec1.md)
+- [why deep learning is taking off?](https://github.com/106AbdulBasit/Deep-learning-Notes-Interview-Questions--CS-Standford230-Andrew-Ng-Kian-Katanforoosh/blob/main/Neural%20Network%20&%20Deep%20Learning/Week%201.md)
+- [What is difference between Software Engineer and Deep Learning Engineer.](https://github.com/106AbdulBasit/Deep-learning-Notes-Interview-Questions--CS-Standford230-Andrew-Ng-Kian-Katanforoosh/blob/main/Neural%20Network%20&%20Deep%20Learning/Week%201.md)
 
 
 # Lecture 2
 
-The topics from the Neural Network Deep learning Week 2
+**The topics from the Neural Network Deep learning Week 2**
 
 - [Binary Classification](https://github.com/106AbdulBasit/Deep-learning-Notes-Interview-Questions--CS-Standford230-Andrew-Ng-Kian-Katanforoosh/blob/main/Neural%20Network%20%26%20Deep%20Learning/Week%202.md)
 - [Logistic Regression](https://github.com/106AbdulBasit/Deep-learning-Notes-Interview-Questions--CS-Standford230-Andrew-Ng-Kian-Katanforoosh/blob/main/Neural%20Network%20%26%20Deep%20Learning/Week%202.md)
@@ -38,6 +36,22 @@ The topics from the Neural Network Deep learning Week 2
 - [logistic Regression Derivatives](https://github.com/106AbdulBasit/Deep-learning-Notes-Interview-Questions--CS-Standford230-Andrew-Ng-Kian-Katanforoosh/blob/main/Neural%20Network%20%26%20Deep%20Learning/Week%202.md)
 - [logistic Regression on M examples](https://github.com/106AbdulBasit/Deep-learning-Notes-Interview-Questions--CS-Standford230-Andrew-Ng-Kian-Katanforoosh/blob/main/Neural%20Network%20%26%20Deep%20Learning/Week%202.md)
 - [Vectorization](https://github.com/106AbdulBasit/Deep-learning-Notes-Interview-Questions--CS-Standford230-Andrew-Ng-Kian-Katanforoosh/blob/main/Neural%20Network%20%26%20Deep%20Learning/Week%202.md)
+
+**Things That were discussed in Class room by Kian Katanforoosh:**
+
+- [Learning Process] (https://github.com/106AbdulBasit/Deep-learning-Notes-Interview-Questions--CS-Standford230-Andrew-Ng-Kian-Katanforoosh/blob/main/Cs230-Standford%20Lecture's%20Notes/Lec2.md)
+
+- [Multi-Classification](https://github.com/106AbdulBasit/Deep-learning-Notes-Interview-Questions--CS-Standford230-Andrew-Ng-Kian-Katanforoosh/blob/main/Cs230-Standford%20Lecture's%20Notes/Lec2.md)
+- [Neural Network with Hidden] (https://github.com/106AbdulBasit/Deep-learning-Notes-Interview-Questions--CS-Standford230-Andrew-Ng-Kian-Katanforoosh/blob/main/Cs230-Standford%20Lecture's%20Notes/Lec2.md)
+- [Case Study 1 Day & Night Classifcation] (https://github.com/106AbdulBasit/Deep-learning-Notes-Interview-Questions--CS-Standford230-Andrew-Ng-Kian-Katanforoosh/blob/main/Cs230-Standford%20Lecture's%20Notes/Lec2.md)
+- [Case study 2 : Face Verification] (https://github.com/106AbdulBasit/Deep-learning-Notes-Interview-Questions--CS-Standford230-Andrew-Ng-Kian-Katanforoosh/blob/main/Cs230-Standford%20Lecture's%20Notes/Lec2.md)
+- [Case Study 3 : Art Generation] (https://github.com/106AbdulBasit/Deep-learning-Notes-Interview-Questions--CS-Standford230-Andrew-Ng-Kian-Katanforoosh/blob/main/Cs230-Standford%20Lecture's%20Notes/Lec2.md)
+- [Case study 4 : Trigger Word Detection] (https://github.com/106AbdulBasit/Deep-learning-Notes-Interview-Questions--CS-Standford230-Andrew-Ng-Kian-Katanforoosh/blob/main/Cs230-Standford%20Lecture's%20Notes/Lec2.md)
+- [Yolo Loss Function] (https://github.com/106AbdulBasit/Deep-learning-Notes-Interview-Questions--CS-Standford230-Andrew-Ng-Kian-Katanforoosh/blob/main/Cs230-Standford%20Lecture's%20Notes/Lec2.md)
+
+
+
+
 
 
 
