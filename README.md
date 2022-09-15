@@ -39,15 +39,15 @@ Week 1
 
 **Things That were discussed in Class room by Kian Katanforoosh:**
 
-- [Learning Process] (https://github.com/106AbdulBasit/Deep-learning-Notes-Interview-Questions--CS-Standford230-Andrew-Ng-Kian-Katanforoosh/blob/main/Cs230-Standford%20Lecture's%20Notes/Lec2.md)
+- [Learning Process](https://github.com/106AbdulBasit/Deep-learning-Notes-Interview-Questions--CS-Standford230-Andrew-Ng-Kian-Katanforoosh/blob/main/Cs230-Standford%20Lecture's%20Notes/Lec2.md)
 
 - [Multi-Classification](https://github.com/106AbdulBasit/Deep-learning-Notes-Interview-Questions--CS-Standford230-Andrew-Ng-Kian-Katanforoosh/blob/main/Cs230-Standford%20Lecture's%20Notes/Lec2.md)
-- [Neural Network with Hidden] (https://github.com/106AbdulBasit/Deep-learning-Notes-Interview-Questions--CS-Standford230-Andrew-Ng-Kian-Katanforoosh/blob/main/Cs230-Standford%20Lecture's%20Notes/Lec2.md)
-- [Case Study 1 Day & Night Classifcation] (https://github.com/106AbdulBasit/Deep-learning-Notes-Interview-Questions--CS-Standford230-Andrew-Ng-Kian-Katanforoosh/blob/main/Cs230-Standford%20Lecture's%20Notes/Lec2.md)
-- [Case study 2 : Face Verification] (https://github.com/106AbdulBasit/Deep-learning-Notes-Interview-Questions--CS-Standford230-Andrew-Ng-Kian-Katanforoosh/blob/main/Cs230-Standford%20Lecture's%20Notes/Lec2.md)
-- [Case Study 3 : Art Generation] (https://github.com/106AbdulBasit/Deep-learning-Notes-Interview-Questions--CS-Standford230-Andrew-Ng-Kian-Katanforoosh/blob/main/Cs230-Standford%20Lecture's%20Notes/Lec2.md)
-- [Case study 4 : Trigger Word Detection] (https://github.com/106AbdulBasit/Deep-learning-Notes-Interview-Questions--CS-Standford230-Andrew-Ng-Kian-Katanforoosh/blob/main/Cs230-Standford%20Lecture's%20Notes/Lec2.md)
-- [Yolo Loss Function] (https://github.com/106AbdulBasit/Deep-learning-Notes-Interview-Questions--CS-Standford230-Andrew-Ng-Kian-Katanforoosh/blob/main/Cs230-Standford%20Lecture's%20Notes/Lec2.md)
+- [Neural Network with Hidden](https://github.com/106AbdulBasit/Deep-learning-Notes-Interview-Questions--CS-Standford230-Andrew-Ng-Kian-Katanforoosh/blob/main/Cs230-Standford%20Lecture's%20Notes/Lec2.md)
+- [Case Study 1 Day & Night Classifcation](https://github.com/106AbdulBasit/Deep-learning-Notes-Interview-Questions--CS-Standford230-Andrew-Ng-Kian-Katanforoosh/blob/main/Cs230-Standford%20Lecture's%20Notes/Lec2.md)
+- [Case study 2 : Face Verification](https://github.com/106AbdulBasit/Deep-learning-Notes-Interview-Questions--CS-Standford230-Andrew-Ng-Kian-Katanforoosh/blob/main/Cs230-Standford%20Lecture's%20Notes/Lec2.md)
+- [Case Study 3 : Art Generation](https://github.com/106AbdulBasit/Deep-learning-Notes-Interview-Questions--CS-Standford230-Andrew-Ng-Kian-Katanforoosh/blob/main/Cs230-Standford%20Lecture's%20Notes/Lec2.md)
+- [Case study 4 : Trigger Word Detection](https://github.com/106AbdulBasit/Deep-learning-Notes-Interview-Questions--CS-Standford230-Andrew-Ng-Kian-Katanforoosh/blob/main/Cs230-Standford%20Lecture's%20Notes/Lec2.md)
+- [Yolo Loss Function](https://github.com/106AbdulBasit/Deep-learning-Notes-Interview-Questions--CS-Standford230-Andrew-Ng-Kian-Katanforoosh/blob/main/Cs230-Standford%20Lecture's%20Notes/Lec2.md)
 
 
 
