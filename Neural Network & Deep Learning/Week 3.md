@@ -111,6 +111,105 @@ Z1 = W1A0 + b1 # shape of Z1 (noOfHiddenNeurons,m)
 - Leaky RELU activation function different of RELU is that if the input is negative the slope will be so small. It works as
 RELU but most people uses RELU. Leaky_RELU = max(0.01z,z) #the 0.01 can be a parameter for your algorithm.
 
+# Why do we need non linear activation function
+
+- we removed the activation function from our algorithm that can be called linear activation function.
+- Linear activation function will output linear activations
+- There will be no complex calculation the output might be same.
+- Whatever hidden layers you add, the activation will be always linear like logistic regression (So its useless in a lot of
+complex problems)
+- You might use linear activation function in one place - in the output layer if the output is real numbers (regression
+problem). But even in this case if the output value is non-negative you could use RELU instead.
+
+
+
+# Derivatives of the activation Functions
+
+**Sigmoid**
+
+'''
+g(z) = 1 / (1 + np.exp(-z))
+g'(z) = (1 / (1 + np.exp(-z))) * (1 - (1 / (1 + np.exp(-z))))
+g'(z) = g(z) * (1 - g(z))
+'''
+
+**Tanh activation function**
+'''
+g(z) = (e^z - e^-z) / (e^z + e^-z)
+g'(z) = 1 - np.tanh(z)^2 = 1 - g(z)^2
+'''
+
+**Derivative of Relu activation Function**
+'''
+g(z) = np.maximum(0,z)
+g'(z) = { 0 if z < 0
+1 if z >= 0 }
+'''
+**leakyRelu activation Function**
+'''
+g(z) = np.maximum(0.01 * z, z)
+g'(z) = { 0.01 if z < 0
+1 if z >= 0 }
+'''
+
+
+
+# Gradeint Descent for the neural Network:
+
+- Gradient descent algorithm:
+  - NN parameters
+    - n[0] = Nx
+    - n[1] = NoOfHiddenNeurons
+    - n[2] = NoOfOutputNeurons = 1
+    - W1 shape is (n[1],n[0])
+    - b1 shape is (n[1],1)
+    - W2 shape is (n[2],n[1])
+    - b2 shape is (n[2],1)
+  - Cost function I = I(W1, b1, W2, b2) = (1/m) * Sum(L(Y,A2))
+  - Gradeint Descent Algorithm
+  '''
+  Repeat:
+Compute predictions (y'[i], i = 0,...m)
+Get derivatives: dW1, db1, dW2, db2
+Update: W1 = W1 - LearningRate * dW1
+b1 = b1 - LearningRate * db1
+W2 = W2 - LearningRate * dW2
+b2 = b2 - LearningRate * db2
+'''
+
+- Forward propagation:
+'''
+Z1 = W1A0 + b1 # A0 is X
+A1 = g1(Z1)
+Z2 = W2A1 + b2
+A2 = Sigmoid(Z2) # Sigmoid because the output is between 0 and 1
+'''
+- Backpropagation (derivations):
+'''
+dZ2 = A2 - Y # derivative of cost function we used * derivative of the sigmoid function
+dW2 = (dZ2 * A1.T) / m
+db2 = Sum(dZ2) / m
+dZ1 = (W2.T * dZ2) * g'1(Z1) # element wise product (*)
+dW1 = (dZ1 * A0.T) / m # A0 = X
+db1 = Sum(dZ1) / m
+# Hint there are transposes with multiplication because to keep dimensions correc
+'''
+
+# Random initialization
+
+- In logistic regression it wasn't important to initialize the weights randomly, while in NN we have to initialize them
+randomly.
+- If we initialize all the weights with zeros in NN it won't work (initializing bias with zero is OK):
+   - all hidden units will be completely identical (symmetric) - compute exactly the same function
+   - on each gradient descent iteration all the hidden units will always update the same.
+- We need small values because in sigmoid (or tanh), for example, if the weight is too large you are more likely to end up
+even at the very start of training with very large values of Z. Which causes your tanh or your sigmoid activation function
+to be saturated, thus slowing down learning. If you don't have any sigmoid or tanh activation functions throughout your
+neural network, this is less of an issue.
+- Constant 0.01 is alright for 1 hidden layer networks, but if the NN is deep this number can be changed but it will always
+be a small number.
+
+
 
 
 
