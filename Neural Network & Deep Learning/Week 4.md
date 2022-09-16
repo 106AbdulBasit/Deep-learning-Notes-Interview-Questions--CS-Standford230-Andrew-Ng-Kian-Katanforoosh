@@ -82,5 +82,73 @@ Regression), then try the shallow neural network and so on.
 - The red line shows the back word propagation
 
 
+# Forward and Backward Propagation
+
+- Pseudo code for forward propagation for layer l:
+'''
+Input A[l-1]
+Z[l] = W[l]A[l-1] + b[l]
+A[l] = g[l](Z[l])
+Output A[l], cache(Z[l])
+'''
+- Pseudo code for back propagation for layer l:
+'''
+Input da[l], Caches
+dZ[l] = dA[l] * g'[l](Z[l])
+dW[l] = (dZ[l]A[l-1].T) / m
+db[l] = sum(dZ[l])/m # Dont forget axis=1, keepdims=True
+dA[l-1] = w[l].T * dZ[l] # The multiplication here are a dot product.
+Output dA[l-1], dW[l], db[l]
+'''
+
+- The deraviative of with respect to the loss function
+
+'''
+ dA[L] = (-(y/a) + ((1-y)/(1-a)))
+'''
+
+# Parameters vs Hyperparameters
+- **Parameters**
+  - Weights
+  - Bias
+- ** Hyperparameters**
+  - Learning rate.
+  - Number of iteration.
+  - Number of hidden layers L .
+  - Number of hidden units n .
+  - Choice of activation functions.
+  
+- Change the hyperparamters
+- try the different value
+- the value which is valid for today may be is not valid after one year
+- In the earlier days of DL and ML learning rate was often called a parameter, but it really is (and now everybody call it) a
+hyperparameter.
 
 
+# Total Number of Parameters
+- The total number of parameters is the sum of all the weights and biases on the neural network. When calculating manually, different types of layers have different methods. The parameters on the Dense, Conv2d, or maybe LSTM layers are slightly different. The principle is the same, we only need to calculate the unit weight and bias.
+
+Consider this image
+
+![pm](https://raw.githubusercontent.com/106AbdulBasit/Deep-learning-Notes-Interview-Questions--CS-Standford230-Andrew-Ng-Kian-Katanforoosh/main/Images/week4/Denselayer.png)
+
+As shown in illustration 1, on the input layer we have 4 input units. And in the hidden layer we have a dense layer with 2 units. Lets say at input layer we have X = {x1, x2, x3, x4}, and in the hidden layer we have a1, a2.
+
+a1 = x1.w11 + x2.w12 + x3.w13 + x4.w14 + b1
+
+a2 = x1.w21 + x2.w22 + x3.w23 + x4.w24 + b2
+
+from the equation it is found that the sum of all weights is 8 which consist of all W= {w11, w12, w13, w14, w21, w22, w23, w24}, and the bias that consist of B = {b1, b2}. Then the total weight and bias is 8+2=10 parameter. If we check it using tensorflow we will get the same amount.
+
+![image](https://user-images.githubusercontent.com/36159918/190663416-09fa615c-ecfa-48de-b461-6904728d5ac8.png)
+
+![image](https://user-images.githubusercontent.com/36159918/190663524-5c63f9d9-c535-4fba-b908-9ca2551776bb.png)
+
+# What does this have to do with the brain
+
+![brain](https://raw.githubusercontent.com/106AbdulBasit/Deep-learning-Notes-Interview-Questions--CS-Standford230-Andrew-Ng-Kian-Katanforoosh/main/Images/week4/brainminin.PNG)
+
+- The analogy that "It is like the brain" has become really an oversimplified explanation.
+- No human today know exactly how many neurons on the brain.
+- There is a very simplistic analogy between a single logistic unit and a single neuron in the brain.
+- NN is a small representation of how brain work. The most near model of human brain is in the computer vision (CNN)
