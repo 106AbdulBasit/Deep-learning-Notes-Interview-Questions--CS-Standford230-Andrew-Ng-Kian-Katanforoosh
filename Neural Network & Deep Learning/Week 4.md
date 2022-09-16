@@ -64,3 +64,23 @@ a[l] = g[l](a[l])
  - When starting on an application don't start directly by dozens of hidden layers. Try the simplest solutions (e.g. Logistic
 Regression), then try the shallow neural network and so on.
     so if there aren't enough hidden layers, then you might require exponentially more hidden units to compute
+    
+    
+   
+# Building blocks of deep neural networks
+
+- Building blocks of deep neural networks
+- 
+![image](https://user-images.githubusercontent.com/36159918/190650935-1d028b1a-8512-48a4-8d64-09b2349e167e.png)
+
+- Deep NN Block
+
+![image](https://user-images.githubusercontent.com/36159918/190654086-2407694f-f5b5-4466-ad58-61dda09415ba.png)
+
+
+- The blue line shows about the forward propagation
+- The red line shows the back word propagation
+
+
+
+
