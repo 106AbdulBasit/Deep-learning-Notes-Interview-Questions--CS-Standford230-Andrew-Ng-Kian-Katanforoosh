@@ -128,3 +128,4 @@ if you have the high varince(over fitting) problem you can try the regularizatio
    regularization) then you might not see it decrease monotonically.
 
   
+j
