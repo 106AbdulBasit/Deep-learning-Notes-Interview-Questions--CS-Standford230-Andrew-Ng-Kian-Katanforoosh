@@ -168,3 +168,31 @@ overfitting.
 - downside of dropout is that the cost function J is not well defined and it will be hard to debug (plot J by iteration).
    - To solve that you'll need to turn off dropout, set all the keep_prob s to 1, and then run the code and check that it 
     monotonically decreases J and then turn on the dropouts again.
+
+# Other regularization methods
+
+- **Data Augmentation**
+- If you  model is over fiiting and it requires more data to solve the problem ,Rather the collecting more data you can augmentain the data.
+- For example in Computer Vision:
+   - You can flip all your pictures horizontally this will give you m more data instances.
+   - You could also apply a random position and rotation to an image to get more data.
+- For example in OCR, you can impose random rotations and distortions to digits/letters.
+- New data obtained using this technique isn't as good as the real independent data, but still can be used as a
+   regularization technique
+   
+- **Early stopping**
+   - In this technique we plot the training set and the dev set cost together for each iteration. At some iteration the dev
+      set cost will stop decreasing and will start increasing.
+   - We will pick the point at which the training set error and dev set error are best (lowest training cost with lowest dev
+      cost).
+   -  We will take these parameters as the best parameters.
+   -  ![image](https://user-images.githubusercontent.com/36159918/190858101-466ba582-4746-4688-becd-492a8e5ccab1.png)
+   -  Andrew prefers to use L2 regularization instead of early stopping because this technique simultaneously tries to
+      minimize the cost function and not to overfit which contradicts the **orthogonalization approach** (will be discussed
+       further).
+   - But its advantage is that you don't need to search a hyperparameter like in other regularization approaches (like
+      lambda in L2 regularization).
+      
+  - 
+   
+  
