@@ -277,4 +277,4 @@ descent will take tiny little steps. It will take a long time for gradient desce
 variance) which will help gradients not to vanish/explode too quickly
  - The initialization in this video is called "He Initialization / Xavier Initialization" and has been published in 2015 paper.
 - 
-  
+   
