@@ -193,6 +193,35 @@ overfitting.
    - But its advantage is that you don't need to search a hyperparameter like in other regularization approaches (like
       lambda in L2 regularization).
       
-  - 
+- Model Ensembles:
+- Algorithm:
+   - Train multiple independent models
+   - At test time average their results.
+- It can get you extra 2% performance.
+- It reduces the generalization error.
+
+
+# Normalizing inputs
+
+- If you normalize your inputs this will speed up the training process a lot.
+- Normalization are going on these steps:
+   - Get the mean of the training set: mean = (1/m) * sum(x(i))
+   - Subtract the mean from each input: X = X - mean >> (This makes your inputs centered around 0.)
+   - Get the variance of the training set: variance = (1/m) * sum(x(i)^2)
+   - Normalize the variance. X /= variance
+- Use the value of mean and varince of the train set  to normalize the test/dev set , beacuse you dont want to normalize differently
+
+**Why normalize?**
+
+![nr](https://raw.githubusercontent.com/106AbdulBasit/Deep-learning-Notes-Interview-Questions--CS-Standford230-Andrew-Ng-Kian-Katanforoosh/main/Images/Normalizing%20Input.PNG)
+
+- If we don't normalize the inputs our cost function will be deep and its shape will be inconsistent (elongated) then
+optimizing it will take a long time.(see the left side of the image)
+- But if we normalize it the opposite will occur. The shape of the cost function will be consistent (look more
+symmetric like circle in 2D example) and we can use a larger learning rate alpha - the optimization will be faster.
+See the right side of the image.
+
+
+
    
   
