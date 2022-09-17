@@ -221,7 +221,60 @@ optimizing it will take a long time.(see the left side of the image)
 symmetric like circle in 2D example) and we can use a larger learning rate alpha - the optimization will be faster.
 See the right side of the image.
 
+# Vanishing / Exploding gradients
 
+- The Vanishing / Exploding gradients occurs when your derivatives become very small or very big
 
+![gd](https://raw.githubusercontent.com/106AbdulBasit/Deep-learning-Notes-Interview-Questions--CS-Standford230-Andrew-Ng-Kian-Katanforoosh/main/Images/Vanishing.PNG)
+- To understand the problem, suppose that we have a deep neural network with number of layers L, and all the activation
+functions are linear and each b = 0
+
+   - Then:
+      '''
+      Y' = W[L]W[L-1].....W[2]W[1]X
+      '''
+   - Then, if we have 2 hidden units per layer and x1 = x2 = 1, we result in:
+      '''
+      if W[l] = [1.5 0]
+      [0 1.5] (l != L because of different dimensions in the output layer)
+      Y' = W[L] [1.5 0]^(L-1) X = 1.5^L # which will be very large
+      [0 1.5]
+      
+      '''
+      
+      '''
+      if W[l] = [0.5 0]
+      [0 0.5]
+      Y' = W[L] [0.5 0]^(L-1) X = 0.5^L # which will be very small
+      [0 0.5]
+      '''
+
+- The last example explains that the activations (and similarly derivatives) will be decreased/increased exponentially as a
+   function of number of layers.
+- So If W > I (Identity matrix) the activation and gradients will explode.
+- And If W < I (Identity matrix) the activation and gradients will vanish.
+
+- Recently Microsoft trained 152 layers (ResNet)! which is a really big number. With such a deep neural network, if your
+activations or gradients increase or decrease exponentially as a function of L, then these values could get really big or
+really small. And this makes training difficult, especially if your gradients are exponentially smaller than L, then gradient
+descent will take tiny little steps. It will take a long time for gradient descent to learn anything.
    
+   
+# Weight Initialization for Deep Networks
+- A partial solution to the Vanishing / Exploding gradients in NN is better or more careful choice of the random
+   initialization of weights
+- In a single neuron (Perceptron model): Z = w1x1 + w2x2 + ... + wnxn
+   -  So if n_x is large we want W 's to be smaller to not explode the cost.
+- So it turns out that we need the variance which equals 1/n_x to be the range of W 's
+- So lets say when we initialize W 's like this (better to use with tanh activation):
+- np.random.rand(shape) * np.sqrt(1/n[l-1])
+- or variation of this (Bengio et al.):
+- np.random.rand(shape) * np.sqrt(2/(n[l-1] + n[l]))
+- Setting initialization part inside sqrt to 2/n[l-1] for ReLU is better:
+- np.random.rand(shape) * np.sqrt(2/n[l-1])
+- Number 1 or 2 in the nominator can also be a hyperparameter to tune (but not the first to start with)
+- This is one of the best way of partially solution to Vanishing / Exploding gradients (ReLU + Weight Initialization with
+variance) which will help gradients not to vanish/explode too quickly
+ - The initialization in this video is called "He Initialization / Xavier Initialization" and has been published in 2015 paper.
+- 
   
