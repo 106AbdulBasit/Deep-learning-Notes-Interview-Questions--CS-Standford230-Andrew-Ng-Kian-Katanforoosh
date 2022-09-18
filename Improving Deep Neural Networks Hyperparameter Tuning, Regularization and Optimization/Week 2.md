@@ -29,3 +29,31 @@ update_parameters(grads)
 - on 1 epoch it run for 5000 gradient
 -  epoch is a word that means a single pass through the training set. Whereas with batch gradient descent, a single pass through the training set allows you to take      only one gradient descent step. With mini-batch gradient descent, a single pass through the training set, that is one epoch, allows you to take 5,000 gradient      descent steps. 
 -  Now of course you want to take multiple passes through the training set which you usually want to, you might want another for loop for another while loop out there.
+
+# Understanding mini-batch gradient descent
+- In mini-batch algorithm, the cost won't go down with each step as it does in batch algorithm. It could contain some ups
+and downs but generally it has to go down (unlike the batch gradient descent where cost function descreases on each
+
+- ![image](https://user-images.githubusercontent.com/36159918/190920972-4a93a16f-ca8a-4743-a0f8-b6a9fb0bbebe.png)
+
+- Mini-batch size:
+      - ( mini batch size = m ) ==> Batch gradient descent
+      - ( mini batch size = 1 ) ==> Stochastic gradient descent (SGD)
+      - ( mini batch size = between 1 and m ) ==> Mini-batch gradient descent\
+- Batch gradient descent:
+      - too long per iteration (epoch)
+- Stochastic gradient descent:
+      -too noisy regarding cost minimization (can be reduced by using smaller learning rate)
+      -won't ever converge (reach the minimum cost)
+      -lose speedup from vectorization
+-Mini-batch gradient descent:
+      -i. faster learning:
+      - you have the vectorization advantage
+         make progress without waiting to process the entire training set
+      - ii. doesn't always exactly converge (oscelates in a very small region, but you can reduce learning rate)
+-     Guidelines for choosing mini-batch size:
+      -     i. If small training set (< 2000 examples) - use batch gradient descent.
+      -     ii. It has to be a power of 2 (because of the way computer memory is layed out and accessed, sometimes your code
+      -     runs faster if your mini-batch size is a power of 2): 64, 128, 256, 512, 1024, ...
+      -     iii. Make sure that mini-batch fits in CPU/GPU memory.
+-Mini-batch size is a hyperparameter .
