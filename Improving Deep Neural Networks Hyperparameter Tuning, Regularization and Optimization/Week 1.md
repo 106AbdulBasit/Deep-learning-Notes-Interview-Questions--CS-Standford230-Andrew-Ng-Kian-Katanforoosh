@@ -278,3 +278,79 @@ variance) which will help gradients not to vanish/explode too quickly
  - The initialization in this video is called "He Initialization / Xavier Initialization" and has been published in 2015 paper.
 - 
    
+# Numerical approximation of gradients
+- There is an technique called gradient checking which tells you if your implementation of backpropagation is correct.
+- There's a numerical way to calculate the derivative:
+- ![image](https://user-images.githubusercontent.com/36159918/190895164-0b997ac4-5119-40cf-b24b-856b57a7f76c.png)
+
+- Gradient checking approximates the gradients and is very helpful for finding the errors in your backpropagation
+   implementation but it's slower than gradient descent (so use only for debugging).
+- Implementation of this is very simple.
+- Gradient checking:
+   - First take W[1],b[1],...,W[L],b[L] and reshape into one big vector ( theta )
+   - The cost function will be J(theta)
+   - Then take dW[1],db[1],...,dW[L],db[L] into one big vector ( d_theta )
+   - Algorithm:
+      '''
+      eps = 10^-7 # small number
+      for i in len(theta):
+      d_theta_approx[i] = (J(theta1,...,theta[i] + eps) - J(theta1,...,theta[i] - eps)) / 2*eps
+      '''
+   - Finally we evaluate this formula (||d_theta_approx - d_theta||) / (||d_theta_approx||+||d_theta||) ( || -
+      Euclidean vector norm) and check (with eps = 10^-7):
+         - if it is < 10^-7 - great, very likely the backpropagation implementation is correct
+         - if around 10^-5 - can be OK, but need to inspect if there are no particularly big values in d_theta_approx -
+            d_theta vector
+         - if it is >= 10^-3 - bad, probably there is a bug in backpropagation implementation
+  # Gradient checking implementation notes
+  
+  -   Don't use the gradient checking algorithm at training time because it's very slow.
+  -    Use gradient checking only for debugging.
+  -    If algorithm fails grad check, look at components to try to identify the bug.
+  -    Don't forget to add lamda/(2m) * sum(W[l]) to J if you are using L1 or L2 regularization.
+  -    Gradient checking doesn't work with dropout because J is not consistent.
+  -    You can first turn off dropout (set keep_prob = 1.0 ), run gradient checking and then turn on dropout again.
+  -    Run gradient checking at random initialization and train the network for a while maybe there's a bug which can be seen
+  -    when w's and b's become larger (further from 0) and can't be seen on the first iteration (when w's and b's are very
+        small).
+        
+    # Initialization summary
+    
+   -  The weights W should be initialized randomly to break symmetry
+   -   It is however okay to initialize the biases b to zeros. Symmetry is still broken so long as W is initialized randomly
+   -   Different initializations lead to different results
+   -   Random initialization is used to break symmetry and make sure different hidden units can learn different things
+   -      Don't intialize to values that are too large
+   -      He initialization works well for networks with ReLU activations
+
+    # Regularization summary
+    **1. L2 Regularization***
+    **Observations:**
+    
+   -  The value of λ is a hyperparameter that you can tune using a dev set.
+   -   L2 regularization makes your decision boundary smoother. If λ is too large, it is also possible to "oversmooth", resulting
+      in a model with high bias.
+      
+   # What is L2-regularization actually doing?:
+   
+   - L2-regularization relies on the assumption that a model with small weights is simpler than a model with large weights.
+      Thus, by penalizing the square values of the weights in the cost function you drive all the weights to smaller values. It
+      becomes too costly for the cost to have large weights! This leads to a smoother model in which the output changes
+      more slowly as the input changes.
+      
+  -   **Implications of L2-regularization on:**
+      -  cost computation:
+         A regularization term is added to the cost
+      -  backpropagation function:
+         There are extra terms in the gradients with respect to weight matrices  
+      -  weights:
+         weights end up smaller ("weight decay") - are pushed to smaller values.
+2. **Dropout**
+      -  What you should remember about dropout:
+         -  Dropout is a regularization technique.
+            -  You only use dropout during training. Don't use dropout (randomly eliminate nodes) during test time.
+            -  Apply dropout both during forward and backward propagation.
+            -   During training time, divide each dropout layer by keep_prob to keep the same expected value for the activations. For
+                  example, if keep_prob is 0.5, then we will on average shut down half the nodes, so the output will be scaled by 0.5 since
+                     only the remaining half are contributing to the solution. Dividing by 0.5 is equivalent to multiplying by 2. Hence, the
+                     output now has the same expected value. You can check that this works even when keep_prob is other values than 0.5.
