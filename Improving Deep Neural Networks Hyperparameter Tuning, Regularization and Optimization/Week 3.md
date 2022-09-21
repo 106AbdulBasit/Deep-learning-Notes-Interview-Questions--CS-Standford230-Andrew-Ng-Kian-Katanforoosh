@@ -160,4 +160,20 @@ Softmax Descison line examples
 
 ![Softmax regression](https://raw.githubusercontent.com/106AbdulBasit/Deep-learning-Notes-Interview-Questions--CS-Standford230-Andrew-Ng-Kian-Katanforoosh/main/Images/softmax%20regression.PNG)
 
+# Training a Softmax classifier
 
+- There's an activation which is called hard max, which gets 1 for the maximum value and zeros for the others.
+  - If you are using NumPy, its np.max over the vertical axis.
+- The Softmax name came from softening the values and not harding them like hard max
+- Softmax is a generalization of logistic activation function to C classes. If C = 2 softmax reduces to logistic regression.
+- The loss function used with softmax:
+  - L(y, y_hat) = - sum(y[j] * log(y_hat[j])) # j = 0 to C-1
+- The cost function used with softmax:
+  - J(w[1], b[1], ...) = - 1 / m * (sum(L(y[i], y_hat[i]))) # i = 0 to m
+- Back propagation with softmax:
+  - dZ[L] = Y_hat - Y
+- The derivative of softmax is: 
+  - Y_hat * (1 - Y_hat)
+  
+
+# last two will be updated soon
