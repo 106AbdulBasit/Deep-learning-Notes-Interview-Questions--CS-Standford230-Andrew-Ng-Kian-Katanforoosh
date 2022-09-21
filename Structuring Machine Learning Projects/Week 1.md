@@ -85,3 +85,111 @@ Classifier Precision   Recall
  - The old way was valid for a number of examples ~ <100000
  - In the modern deep learning if you have a million or more examples a reasonable split would be 98% training, 1% dev,
    1% test.
+
+
+# When to change dev/test sets and metrics
+
+- Let's take an example. In a cat classification example we have these metric results:
+
+| Metric  | Classification error |
+| ------------- | ------------- |
+| Algorithm A  | 3% error (But a lot of porn images are treated as cat images here)  |
+| Algorithm B  | 5 % error  |
+
+  - In the last example if we choose the best algorithm by metric it would be "A", but if the users decide it will be "B"
+  - Thus in this case, we want and need to change our metric.
+  - OldMetric = (1/m) * sum(y_pred[i] != y[i] ,m)
+    - Where m is the number of Dev set items.
+  - NewMetric = (1/sum(w[i])) * sum(w[i] * (y_pred[i] != y[i]) ,m)
+    - where:
+      - w[i] = 1 if x[i] is not porn
+      - w[i] = 10 if x[i] is porn
+  - This is actually an example of an orthogonalization where you should take a machine learning problem and break it into
+distinct steps:
+  - Figure out how to define a metric that captures what you want to do - place the target.
+  - Worry about how to actually do well on this metric - how to aim/shoot accurately at the target.
+- Conclusion: if doing well on your metric + dev/test set doesn't correspond to doing well in your application, change
+your metric and/or dev/test set.
+
+
+# Why human-level performance?
+
+- We compare to human-level performance because of two main reasons:
+  - Because of advances in deep learning, machine learning algorithms are suddenly working much better and so it has
+    become much more feasible in a lot of application areas for machine learning algorithms to actually become
+    competitive with human-level performance.
+  - ii. It turns out that the workflow of designing and building a machine learning system is much more efficient when
+    you're trying to do something that humans can also do.
+- After an algorithm reaches the human level performance the progress and accuracy slow down.
+  - ![image](https://user-images.githubusercontent.com/36159918/191527122-a0c4aa99-35d5-4deb-81e0-cd08d0864a44.png)
+- You won't surpass an error that's called "Bayes optimal error".
+- There isn't much error range between human-level error and Bayes optimal error.
+- Humans are quite good at a lot of tasks. So as long as Machine learning is worse than humans, you can:
+  - Get labeled data from humans.
+  -  Gain insight from manual error analysis: why did a person get it right?
+  -  Better analysis of bias/variance.
+# Avoidable bias
+- Suppose that the cat classification algorithm gives these results:
+ Humans | 1 | 7.5  |
+| ------------- | ------------- |  ------------- |
+| Training error  | 8  |  8  |
+| Dev Error | 10  |  10  |
+
+  - In the left example, because the human level error is 1% then we have to focus on the bias.
+  - In the right example, because the human level error is 7.5% then we have to focus on the variance.
+  - The human-level error as a proxy (estimate) for Bayes optimal error. Bayes optimal error is always less (better), but
+  - human-level in most cases is not far from it.
+  - You can't do better than Bayes error unless you are overfitting.
+  - Avoidable bias = Training error - Human (Bayes) error
+  - Variance = Dev error - Training error
+
+# Understanding human-level performance
+
+- When choosing human-level performance, it has to be chosen in the terms of what you want to achieve with the system.
+- You might have multiple human-level performances based on the human experience. Then you choose the human-level
+- performance (proxy for Bayes error) that is more suitable for the system you're trying to build.
+- Improving deep learning algorithms is harder once you reach a human-level performance.
+- Summary of bias/variance with human-level performance:
+  - human-level error (proxy for Bayes error)
+    - Calculate avoidable bias = training error - human-level error
+    - If avoidable bias difference is the bigger, then it's bias problem and you should use a strategy for bias
+       resolving.
+  - training error
+    - Calculate variance = dev error - training error
+    - If variance difference is bigger, then you should use a strategy for variance resolving.
+  - Dev error
+- So having an estimate of human-level performance gives you an estimate of Bayes error. And this allows you to more
+  quickly make decisions as to whether you should focus on trying to reduce a bias or trying to reduce the variance of
+  your algorithm.
+- These techniques will tend to work well until you surpass human-level performance, whereupon you might no longer
+  have a good estimate of Bayes error that still helps you make this decision really clearly.
+  
+  
+ # Surpassing human-level performance
+ 
+ - In some problems, deep learning has surpassed human-level performance. Like:
+  - Online advertising.
+  - Product recommendation.
+  - Loan approval.
+ - The last examples are not natural perception task, rather learning on structural data. Humans are far better in natural
+perception tasks like computer vision and speech recognition.
+ - It's harder for machines to surpass human-level performance in natural perception task. But there are already some
+systems that achieved it.
+
+# Improving your model performance
+- The two fundamental asssumptions of supervised learning:
+  - You can fit the training set pretty well. This is roughly saying that you can achieve low avoidable bias.
+  - The training set performance generalizes pretty well to the dev/test set. This is roughly saying that variance is not
+  too bad.
+  
+- To improve your deep learning supervised system follow these guidelines:
+  - Look at the difference between human level error and the training error - avoidable bias.
+  - ii. Look at the difference between the dev/test set and training set error - Variance.
+- If avoidable bias is large you have these options
+  - Train bigger model.
+  - Train longer/better optimization algorithm (like Momentum, RMSprop, Adam).
+  - Find better NN architecture/hyperparameters search.
+- If variance is large you have these options:
+  - Get more training data.
+  - Regularization (L2, Dropout, data augmentation).
+  - Find better NN architecture/hyperparameters search.
