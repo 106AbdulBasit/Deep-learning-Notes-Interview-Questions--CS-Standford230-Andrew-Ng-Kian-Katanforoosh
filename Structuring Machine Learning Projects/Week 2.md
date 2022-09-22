@@ -96,4 +96,37 @@ and fix these labels if you can.
       - Is the difference is big (positive) then maybe you need to find a bigger dev set (dev set and test set come from
         the same distribution, so the only way for there to be a huge gap here, for it to do much better on the dev set
          than the test set, is if you somehow managed to overfit the dev set).
-   - 
+   
+   
+ # Addressing data mismatch
+ 
+ - There aren't completely systematic solutions to this, but there some things you could try.
+    - 1. Carry out manual error analysis to try to understand the difference between training and dev/test sets.
+    - 2. Make training data more similar, or collect more data similar to dev/test sets.
+ - If your goal is to make the training data more similar to your dev set one of the techniques you can use Artificial data
+    synthesis that can help you make more training data.
+    - Combine some of your training data with something that can convert it to the dev/test set distribution.
+        - Examples:
+            a. Combine normal audio with car noise to get audio with car noise example.
+            b. Generate cars using 3D graphics in a car classification example.
+    - Be cautious and bear in mind whether or not you might be accidentally simulating data only from a tiny subset of
+      the space of all possible examples because your NN might overfit these generated data (like particular car noise or
+       a particular design of 3D graphics cars).
+
+# Transfer learning
+- Apply the knowledge you took in a task A and apply it in another task B.
+- For example, you have trained a cat classifier with a lot of data, you can use the part of the trained NN it to solve x-ray
+    classification problem.
+    
+- To do transfer learning, delete the last layer of NN and it's weights and:
+    - i. Option 1: if you have a small data set - keep all the other weights as a fixed weights. Add a new last layer(-s) and
+        initialize the new layer weights and feed the new data to the NN and learn the new weights.
+    - ii. Option 2: if you have enough data you can retrain all the weights.
+- Option 1 and 2 are called fine-tuning and training on task A called pretraining.
+- When transfer learning make sense:
+    - Task A and B have the same input X (e.g. image, audio).
+    - You have a lot of data for the task A you are transferring from and relatively less data for the task B your transferring
+        to.
+    - Low level features from task A could be helpful for learning task B.
+
+# Q what is difference between transfer learning and fine tuning
