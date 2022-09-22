@@ -159,3 +159,50 @@ time. And then each of these tasks helps hopefully all of the other tasks
     - iii. Can train a big enough network to do well on all the tasks.
 - If you can train a big enough NN, the performance of the multi-task learning compared to splitting the tasks is better.
 - Today transfer learning is used more often than multi-task learning.
+
+ # What is end-to-end deep learning?
+ - Some systems have multiple stages to implement. An end-to-end deep learning system implements all these stages with
+    a single NN.
+ - Example 1:
+    - Speech recognition system:
+        Audio ---> Features --> Phonemes --> Words --> Transcript # non-end-to-end system
+       Audio ---------------------------------------> Transcript # end-to-end deep learning system
+    - End-to-end deep learning gives data more freedom, it might not use phonemes when training!
+    - To build the end-to-end deep learning system that works well, we need a big dataset (more data then in non end-toend
+        system).
+  - Example 2:
+    - Face recognition system:
+       Image ---------------------> Face recognition # end-to-end deep learning system
+        Image --> Face detection --> Face recognition # deep learning system - best approach for now
+    - In practice, the best approach is the second one for now.
+    - In the second implementation, it's a two steps approach where both parts are implemented using deep learning.
+    - Its working well because it's harder to get a lot of pictures with people in front of the camera than getting faces of
+        people and compare them.
+    - In the second implementation at the last step, the NN takes two faces as an input and outputs if the two faces are
+        the same person or not.
+  - Example 3:
+    - Machine translation system:
+         English --> Text analysis --> ... --> French # non-end-to-end system
+         English ----------------------------> French # end-to-end deep learning system - best approach
+    - Here end-to-end deep leaning system works better because we have enough data to build it.
+    - Example 4:
+        - Estimating child's age from the x-ray picture of a hand:
+            Image --> Bones --> Age # non-end-to-end system - best approach for now
+            Image ------------> Age # end-to-end system
+    - In this example non-end-to-end system works better because we don't have enough data to train end-to-end
+        system. 
+        
+  # Whether to use end-to-end deep learning
+  
+  - Pros of end-to-end deep learning:
+    - Let the data speak. By having a pure machine learning approach, your NN learning input from X to Y may be more
+      able to capture whatever statistics are in the data, rather than being forced to reflect human preconceptions.
+    - Less hand-designing of components needed.
+  - Cons of end-to-end deep learning:
+    - May need a large amount of data.
+    - Excludes potentially useful hand-design components (it helps more on the smaller dataset).
+  - Applying end-to-end deep learning:
+    - Key question: Do you have sufficient data to learn a function of the complexity needed to map x to y?
+    - Use ML/DL to learn some individual components.
+    - When applying supervised learning you should carefully choose what types of X to Y mappings you want to learn
+        depending on what task you can get data for.
