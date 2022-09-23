@@ -127,3 +127,67 @@
     - The conv can be bottleneck 1 x 1 conv
 
 
+# Network in Network and 1 X 1 convolutions
+- A 1 x 1 convolution - We also call it Network in Network- is so useful in many CNN models.
+- What does a 1 X 1 convolution do? Isn't it just multiplying by a number?
+  - Lets first consider an example:
+    - Input: 6x6x1
+    - Conv: 1x1x1 one filter. # The 1 x 1 Conv
+    - Output: 6x6x1
+  - Another example:
+    - Input: 6x6x32
+    - Conv: 1x1x32 5 filters. # The 1 x 1 Conv
+    - Output: 6x6x5
+  - The Network in Network is proposed in [Lin et al., 2013. Network in network]
+  - It has been used in a lot of modern CNN implementations like ResNet and Inception models.
+  - A 1 x 1 convolution is useful when:
+    - We want to shrink the number of channels. We also call this feature transformation.
+      - In the second discussed example above we have shrinked the input from 32 to 5 channels.
+  - We will later see that by shrinking it we can save a lot of computations
+  - If we have specified the number of 1 x 1 Conv filters to be the same as the input number of channels then the
+  - output will contain the same number of channels. Then the 1 x 1 Conv will act like a non linearity and will learn non
+    linearity operator
+  - Replace fully connected layers with 1 x 1 convolutions as Yann LeCun believes they are the same.
+    - In Convolutional Nets, there is no such thing as "fully-connected layers". There are only convolution layers with
+      1x1 convolution kernels and a full connection table. Yann LeCun
+ 
+ # Inception network motivation
+ 
+ - When you design a CNN you have to decide all the layers yourself. Will you pick a 3 x 3 Conv or 5 x 5 Conv or maybe a
+   max pooling layer. You have so many choices.
+ -  What inception tells us is, Why not use all of them at once?
+ - Inception module, naive version:
+     ![image](https://user-images.githubusercontent.com/36159918/192020156-8940402f-191b-4adf-8add-6f4fe1311390.png)
+ - Hint that max-pool are same here.
+ - Input to the inception module are 28 x 28 x 192 and the output are 28 x 28 x 256
+ - We have done all the Convs and pools we might want and will let the NN learn and decide which it want to use
+   most.
+ - The problem of computational cost in Inception model:
+    - If we have just focused on a 5 x 5 Conv that we have done in the last example.
+    - There are 32 same filters of 5 x 5, and the input are 28 x 28 x 192.
+    - Output should be 28 x 28 x 32
+    - The total number of multiplications needed here are:
+      - Number of outputs * Filter size * Filter size * Input dimensions
+      - Which equals: 28 * 28 * 32 * 5 * 5 * 192 = 120 Mil
+      - 120 Mil multiply operation still a problem in the modern day computers.
+      - Using a 1 x 1 convolution we can reduce 120 mil to just 12 mil. Lets see how.
+    - Using 1 X 1 convolution to reduce computational cost:
+      - The new architecture are:
+         - X0 shape is (28, 28, 192)
+         - We then apply 16 (1 x 1 Convolution)
+         - That produces X1 of shape (28, 28, 16)
+         - Hint, we have reduced the dimensions here.
+         - Then apply 32 (5 x 5 Convolution)
+         - That produces X2 of shape (28, 28, 32)
+      - Now lets calculate the number of multiplications:
+        - For the first Conv: 28 * 28 * 16 * 1 * 1 * 192 = 2.5 Mil
+        - For the second Conv: 28 * 28 * 32 * 5 * 5 * 16 = 10 Mil
+        - So the total number are 12.5 Mil approx. which is so good compared to 120 Mil
+      - A 1 x 1 Conv here is called Bottleneck BN .
+      - It turns out that the 1 x 1 Conv won't hurt the performance.
+      - Inception module, dimensions reduction version:
+        ![image](https://user-images.githubusercontent.com/36159918/192023433-c556a432-db5f-439d-8193-06269740167d.png)
+      - Example of inception model in Keras:
+         ![image](https://user-images.githubusercontent.com/36159918/192023605-db8aa7b7-ca80-4bf0-98e6-532060f61121.png)
+
+
