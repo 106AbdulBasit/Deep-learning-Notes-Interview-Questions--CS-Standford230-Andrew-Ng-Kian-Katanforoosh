@@ -64,3 +64,58 @@ negative values. To solve this we can use the abs function to make it positive.
  - What we learned in the deep learning is that we don't need to hand craft these numbers, we can treat them as weights
     and then learn them. It can learn horizontal, vertical, angled, or any edge type automatically rather than getting them by
     hand.
+
+# Padding
+- In order to to use deep neural networks we really need to use paddings.
+- In the last section we saw that a 6x6 matrix convolved with 3x3 filter/kernel gives us a 4x4 matrix.
+- To give it a general rule, if a matrix nxn is convolved with fxf filter/kernel give us n-f+1,n-f+1 matrix.
+- The convolution operation shrinks the matrix if f>1.
+- We want to apply convolution operation multiple times, but if the image shrinks we will lose a lot of data on this
+  process. Also the edges pixels are used less than other pixels in an image
+- So the problems with convolutions are:
+  - Shrinks output.
+  - throwing away a lot of information that are in the edges.
+- To solve these problems we can pad the input image before convolution by adding some rows and columns to it. We
+  will call the padding amount P the number of row/columns that we will insert in top, bottom, left and right of the
+  image
+- In almost all the cases the padding values are zeros.
+- The general rule now, if a matrix nxn is convolved with fxf filter/kernel and padding p give us n+2p-f+1,n+2p-f+1
+  matrix.
+- If n = 6, f = 3, and p = 1 Then the output image will have n+2p-f+1 = 6+2-3+1 = 6 . We maintain the size of the image.
+- Same convolutions is a convolution with a pad so that output size is the same as the input size. Its given by the
+  equation:
+  P = (f-1) / 2
+- In computer vision f is usually odd. Some of the reasons is that its have a center value.
+
+# Strided convolution
+- Strided convolution is another piece that are used in CNNs.
+- We will call stride S .
+- When we are making the convolution operation we used S to tell us the number of pixels we will jump when we are
+  convolving filter/kernel. The last examples we described S was 1
+- Now the general rule are:
+  - if a matrix nxn is convolved with fxf filter/kernel and padding p and stride s it give us (n+2p-f)/s + 1,(n+2pf)/
+    s + 1 matrix.
+- In case (n+2p-f)/s + 1 is fraction we can take floor of this value.
+- In math textbooks the conv operation is filpping the filter before using it. What we were doing is called cross-correlation
+operation but the state of art of deep learning is using this as conv operation.
+- Same convolutions is a convolution with a padding so that output size is the same as the input size. Its given by the
+equation:
+ - p = (n*s - n + f - s) / 2
+When s = 1 ==> P = (f-1) / 2
+
+# Convolutions over volumes
+- We see how convolution works with 2D images, now lets see if we want to convolve 3D images (RGB image)
+- We will convolve an image of height, width, # of channels with a filter of a height, width, same # of channels. Hint that
+  the image number channels and the filter number of channels are the same.
+- We can call this as stacked filters for each channel!
+- Example:
+    - Input image: 6x6x3
+    - Filter: 3x3x3
+    - Result image: 4x4x1
+    - In the last result p=0, s=1
+ - Hint the output here is only 2D.
+ - We can use multiple filters to detect multiple features or edges. Example.
+    - Input image: 6x6x3
+    - 10 Filters: 3x3x3
+    - Result image: 4x4x10
+    - In the last result p=0, s=1
