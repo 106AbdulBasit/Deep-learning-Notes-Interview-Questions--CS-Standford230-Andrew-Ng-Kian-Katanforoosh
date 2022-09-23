@@ -119,3 +119,141 @@ When s = 1 ==> P = (f-1) / 2
     - 10 Filters: 3x3x3
     - Result image: 4x4x10
     - In the last result p=0, s=1
+
+# One Layer of a Convolutional Network
+- First we convolve some filters to a given input and then add a bias to each filter output and then get RELU of the result.
+Example:
+  - Input image: 6x6x3 # a0
+  - 10 Filters: 3x3x3 #W1
+  - Result image: 4x4x10 #W1a0
+  - Add b (bias) with 10x1 will get us : 4x4x10 image #W1a0 + b
+  - Apply RELU will get us: 4x4x10 image #A1 = RELU(W1a0 + b)
+  - In the last result p=0, s=1
+  -  Hint number of parameters here are: (3x3x3x10) + 10 = 280
+- The last example forms a layer in the CNN.
+-  Hint: no matter the size of the input, the number of the parameters is same if filter size is same. That makes it less prone
+to overfitting.
+- Here are some notations we will use. If layer l is a conv layer:
+    - Hyperparameters
+    - f[l] = filter size
+    - p[l] = padding # Default is zero
+    - s[l] = stride
+    - nc[l] = number of filters
+    - Input: n[l-1] x n[l-1] x nc[l-1] Or nH[l-1] x nW[l-1] x nc[l-1]
+    - Output: n[l] x n[l] x nc[l] Or nH[l] x nW[l] x nc[l]
+    - Where n[l] = (n[l-1] + 2p[l] - f[l] / s[l]) + 1
+    - Each filter is: f[l] x f[l] x nc[l-1]
+    - Activations: a[l] is nH[l] x nW[l] x nc[l]
+            A[l] is m x nH[l] x nW[l] x nc[l] # In batch or minbatch training
+    - Weights: f[l] * f[l] * nc[l-1] * nc[l]
+    - bias: (1, 1, 1, nc[l])
+  
+  # A simple convolution network example
+  
+  ![cpnvnet](https://raw.githubusercontent.com/106AbdulBasit/Deep-learning-Notes-Interview-Questions--CS-Standford230-Andrew-Ng-Kian-Katanforoosh/main/Images/Convnet.PNG)
+  
+  - Lets build a big example.
+    - Input Image are: a0 = 39x39x3
+      - n0 = 39 and nc0 = 3
+    - First layer (Conv layer):
+      - f1 = 3 , s1 = 1 , and p1 = 0
+      - number of filters = 10
+      - Then output are a1 = 37x37x10
+      - n1 = 37 and nc1 = 10
+    - Second layer (Conv layer):
+      - f2 = 5 , s2 = 2 , p2 = 0
+      - number of filters = 20
+      - The output are a2 = 17x17x20
+      - n2 = 17 , nc2 = 20
+      - Hint shrinking goes much faster because the stride is 2
+    - Third layer (Conv layer):
+      - Third layer (Conv layer):
+      - f3 = 5 , s3 = 2 , p3 = 0
+      - number of filters = 40
+      - The output are a3 = 7x7x40
+      - n3 = 7 , nc3 = 40
+     - Forth layer (Fully connected Softmax)
+        - a3 = 7x7x40 = 1960 as a vector..
+  - In the last example you seen that the image are getting smaller after each layer and thats the trend now.
+  - Types of layer in a convolutional network:
+    - Convolution. #Conv
+    - Pooling #Pool
+    - Fully connected #FC
+
+
+#  Pooling layers
+- Other than the conv layers, CNNs often uses pooling layers to reduce the size of the inputs, speed up computation, and
+to make some of the features it detects more robust.
+- Max pooling example: 
+    - ![image](https://user-images.githubusercontent.com/36159918/191970108-8bf9d274-2205-4375-acf6-279269d062b1.png)
+
+    - This example has f = 2 , s = 2 , and p = 0 hyperparameters
+- The max pooling is saying, if the feature is detected anywhere in this filter then keep a high number. But the main
+reason why people are using pooling because its works well in practice and reduce computations.
+- Max pooling has no parameters to learn.
+- Example of Max pooling on 3D input:
+  - Input: 4x4x10
+  - Max pooling size = 2 and stride = 2
+  - Output: 2x2x10
+- Average pooling is taking the averages of the values instead of taking the max values.
+- Max pooling is used more often than average pooling in practice.
+- If stride of pooling equals the size, it will then apply the effect of shrinking.
+- Hyperparameters summary
+  - f : filter size.
+  - s : stride.
+  - Padding are rarely uses here.
+  - Max or average pooling
+
+# Convolutional neural network example
+- Now we will deal with a full CNN example. This example is something like the LeNet-5 that was invented by Yann Lecun
+
+![NNexample](https://raw.githubusercontent.com/106AbdulBasit/Deep-learning-Notes-Interview-Questions--CS-Standford230-Andrew-Ng-Kian-Katanforoosh/main/Images/NNExample.PNG)
+  - Input Image are: a0 = 32x32x3
+    - n0 = 32 and nc0 = 3
+  - First layer (Conv layer): #Conv1
+    - f1 = 5 , s1 = 1 , and p1 = 0
+    - number of filters = 6
+    - Then output are a1 = 28x28x6
+    - n1 = 28 and nc1 = 6
+    - Then apply (Max pooling): #Pool1
+        - f1p = 2 , and s1p = 2
+        - The output are a1 = 14x14x6
+   - Second layer (Conv layer): #Conv2
+      - f2 = 5 , s2 = 1 , p2 = 0
+      - number of filters = 16
+      - The output are a2 = 10x10x16
+      - n2 = 10 , nc2 = 16
+      - Then apply (Max pooling): #Pool2
+           - f2p = 2 , and s2p = 2
+          - The output are a2 = 5x5x1
+  - Third layer (Fully connected) #FC3
+    - Number of neurons are 120
+    - The output a3 = 120 x 1 . 400 came from 5x5x16
+  - Forth layer (Fully connected) #FC4
+    - Number of neurons are 84
+    - The output a4 = 84 x 1 .
+  - Fifth layer (Softmax)
+      - Number of neurons is 10 if we need to identify for example the 10 digits.
+  - Hint a Conv1 and Pool1 is treated as one layer.
+  - Some statistics about the last example:
+    - ![image](https://user-images.githubusercontent.com/36159918/191974692-4841a391-82cd-453f-95a8-52b7ed9cf302.png)
+
+- Hyperparameters are a lot. For choosing the value of each you should follow the guideline that we will discuss later or 
+- check the literature and takes some ideas and numbers from it.
+- Usually the input size decreases over layers while the number of filters increases.
+- A CNN usually consists of one or more convolution (Not just one as the shown examples) followed by a pooling.
+- Fully connected layers has the most parameters in the network.
+- To consider using these blocks together you should look at other working examples firsts to get some intuitions.
+
+# Why convolutions?
+
+![Why Convo](https://raw.githubusercontent.com/106AbdulBasit/Deep-learning-Notes-Interview-Questions--CS-Standford230-Andrew-Ng-Kian-Katanforoosh/main/Images/WHY%20convolutions.PNG)
+- Two main advantages of Convs are:
+  - Parameter sharing.
+    - A feature detector (such as a vertical edge detector) that's useful in one part of the image is probably useful in
+      another part of the image.
+  - sparsity of connections
+    - In each layer, each output value depends only on a small number of inputs which makes it translation
+    invariance
+  - Putting it all together:
+    - ![image](https://user-images.githubusercontent.com/36159918/191976493-1fef8504-fb3c-4bb9-9391-3de60793e7bf.png)
