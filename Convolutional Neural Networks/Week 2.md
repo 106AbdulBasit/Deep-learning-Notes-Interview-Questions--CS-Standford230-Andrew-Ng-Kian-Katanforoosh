@@ -261,3 +261,96 @@
 -  EfficientNet, gives you a way to do so
 -  We have a base line archetecture and we will scale in to to three dimensions according to our need
 -  ![Efiecent](https://raw.githubusercontent.com/106AbdulBasit/Deep-learning-Notes-Interview-Questions--CS-Standford230-Andrew-Ng-Kian-Katanforoosh/main/Images/Efficent%20Net.PNG)
+
+#  Using Open-Source Implementation
+- We have learned a lot of NNs and ConvNets architectures.
+- It turns out that a lot of these NN are difficult to replicated. because there are some details that may not presented on
+  its papers. There are some other reasons like:
+  - Learning decay.
+  - Parameter tuning.
+- lot of deep learning researchers are opening sourcing their code into Internet on sites like Github.
+- If you see a research paper and you want to build over it, the first thing you should do is to look for an open source
+   implementation for this paper.
+- Some advantage of doing this is that you might download the network implementation along with its
+  parameters/weights. The author might have used multiple GPUs and spent some weeks to reach this result and its right
+  in front of you after you download it.
+  
+# Transfer Learning
+- If you are using a specific NN architecture that has been trained before, you can use this pretrained parameters/weights
+  instead of random initialization to solve your problem.
+- It can help you boost the performance of the NN.
+  The pretrained models might have trained on a large datasets like ImageNet, Ms COCO, or pascal and took a lot of time
+  to learn those parameters/weights with optimized hyperparameters. This can save you a lot of time.
+- Lets see an example:
+  - Lets say you have a cat classification problem which contains 3 classes Tigger, Misty and neither.
+  - You don't have much a lot of data to train a NN on these images.
+  - Andrew recommends to go online and download a good NN with its weights, remove the softmax activation layer
+    and put your own one and make the network learn only the new layer while other layer weights are fixed/frozen.
+  - Frameworks have options to make the parameters frozen in some layers using trainable = 0 or freeze = 0
+  - One of the tricks that can speed up your training, is to run the pretrained NN without final softmax layer and get an
+    intermediate representation of your images and save them to disk. And then use these representation to a shallow
+    NN network. This can save you the time needed to run an image through all the layers.
+      - Its like converting your images into vectors.
+  - Another example
+    - What if in the last example you have a lot of pictures for your cats.
+    - One thing you can do is to freeze few layers from the beginning of the pretrained network and learn the other
+      weights in the network.
+    - Some other idea is to throw away the layers that aren't frozen and put your own layers there.
+   - Another example:
+      - If you have enough data, you can fine tune all the layers in your pretrained network but don't random initialize the
+        parameters, leave the learned parameters as it is and learn from there.
+     
+   # Data Augmentation
+   - If data is increased, your deep NN will perform better. Data augmentation is one of the techniques that deep learning
+      uses to increase the performance of deep NN.
+   - The majority of computer vision applications needs more data right now.
+   - Some data augmentation methods that are used for computer vision tasks includes:
+      - Mirroring.
+      - Random cropping.
+        - The issue with this technique is that you might take a wrong crop.
+        - The solution is to make your crops big enough. 
+      - Rotation.
+      - Shearing.
+      - Local warping.
+      - Color shifting.
+          - For example, we add to R, G, and B some distortions that will make the image identified as the same for the
+            human but is different for the computer.
+          - In practice the added value are pulled from some probability distribution and these shifts are some small.
+          - Makes your algorithm more robust in changing colors in images.
+          - There are an algorithm which is called PCA color augmentation that decides the shifts needed automatically.   
+   - Implementing distortions during training:
+      - You can use a different CPU thread to make you a distorted mini batches while you are training your NN.
+   - Data Augmentation has also some hyperparameters. A good place to start is to find an open source data augmentation
+    implementation and then use it or fine tune these hyperparameters.
+  
+  
+  # State of Computer Vision
+  - For a specific problem we may have a little data for it or a lots of data.
+  - Speech recognition problems for example has a big amount of data, while image recognition has a medium amount of
+    data and the object detection has a small amount of data nowadays.
+  - If your problem has a large amount of data, researchers are tend to use:
+    - Simpler algorithms.
+    - Less hand engineering.
+  - If you don't have that much data people tend to try more hand engineering for the problem "Hacks". Like choosing a
+      more complex NN architecture.
+   - Because we haven't got that much data in a lot of computer vision problems, it relies a lot on hand engineering. 
+   - We will see in the next chapter that because the object detection has less data, a more complex NN architectures will be
+      presented.
+   - Tips for doing well on benchmarks/winning competitions:
+      - Ensembling.
+        - Train several networks independently and average their outputs. Merging down some classifiers.
+        - After you decide the best architecture for your problem, initialize some of that randomly and train them
+            independently.
+        - This can give you a push by 2%
+        - But this will slow down your production by the number of the ensembles. Also it takes more memory as it saves
+            all the models in the memory.
+        - People use this in competitions but few uses this in a real production.
+       - Multi-crop at test time.
+          - Run classifier on multiple versions of test versions and average results.
+          - There is a technique called 10 crops that uses this.
+          - This can give you a better result in the production.
+   - Use open source code
+    - Use architectures of networks published in the literature.
+    - Use open source implementations if possible.
+    - Use pretrained models and fine-tune on your dataset.
+     
