@@ -237,4 +237,18 @@
     - For instance if you have 512 then
     - 1/512 + 1/9
  - the depthwise separable convolution rougly 10 times cheaper in computational costs
- 
+
+# Mobile Net Architecture
+- In mobile net architecture it has 13 13 blocks of mobile net followed by pooling Fully connected and softmax
+- In mobile net v2 we have  Residual blocks
+- ![Mobilenet](https://raw.githubusercontent.com/106AbdulBasit/Deep-learning-Notes-Interview-Questions--CS-Standford230-Andrew-Ng-Kian-Katanforoosh/main/Images/MobileNet%20v2.PNG)
+
+- The first step is exapnasion  you go from n*n*3 >> n *n * 18
+- Normally the expansion is done with factor of 6
+- The secod step is Depth wise convolution
+-  This last step is also called a projection step because you're projecting down from n by n by 18 down to n by n by 3.
+-  The expansion allow the neural network to learn more richer function
+-   You want to deploy it to the mobile devices that's why the projection use to back down to a smaller set of value
+-  allow your neural network to learn richer and more complex functions, while also keeping the amounts of memory that is the size of the activations you need to      pass from layer to layer
+-  Mobile net comparsions
+  - ![Comparsion](https://raw.githubusercontent.com/106AbdulBasit/Deep-learning-Notes-Interview-Questions--CS-Standford230-Andrew-Ng-Kian-Katanforoosh/main/Images/MObilenetcomparsion.PNG)
