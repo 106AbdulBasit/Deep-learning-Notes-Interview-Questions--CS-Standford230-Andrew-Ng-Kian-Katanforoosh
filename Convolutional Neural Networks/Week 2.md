@@ -252,3 +252,12 @@
 -  allow your neural network to learn richer and more complex functions, while also keeping the amounts of memory that is the size of the activations you need to      pass from layer to layer
 -  Mobile net comparsions
   - ![Comparsion](https://raw.githubusercontent.com/106AbdulBasit/Deep-learning-Notes-Interview-Questions--CS-Standford230-Andrew-Ng-Kian-Katanforoosh/main/Images/MObilenetcomparsion.PNG)
+
+
+# Efficent Net
+- there a way to tune MobileNet, or some other architecture, to your specific device
+- We can Scale the neural network in to depth or resolution or in dimensions
+- Can we scale up neural netrwok automatically
+-  EfficientNet, gives you a way to do so
+-  We have a base line archetecture and we will scale in to to three dimensions according to our need
+-  ![Efiecent](https://raw.githubusercontent.com/106AbdulBasit/Deep-learning-Notes-Interview-Questions--CS-Standford230-Andrew-Ng-Kian-Katanforoosh/main/Images/Efficent%20Net.PNG)
