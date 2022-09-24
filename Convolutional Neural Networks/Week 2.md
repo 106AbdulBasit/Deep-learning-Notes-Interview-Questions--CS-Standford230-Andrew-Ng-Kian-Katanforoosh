@@ -191,3 +191,50 @@
          ![image](https://user-images.githubusercontent.com/36159918/192023605-db8aa7b7-ca80-4bf0-98e6-532060f61121.png)
 
 
+# Inception network (GoogleNet)
+- The inception network consist of concatenated blocks of the Inception module.
+- The name inception was taken from a meme image which was taken from Inception movie
+- Here are the full model:
+  ![image](https://user-images.githubusercontent.com/36159918/192089687-e0d15816-2050-411b-b1f5-18d1ee1681e7.png)
+- Some times a Max-Pool block is used before the inception module to reduce the dimensions of the inputs.
+- There are a 3 Sofmax branches at different positions to push the network toward its goal. and helps to ensure that the
+  intermediate features are good enough to the network to learn and it turns out that softmax0 and sofmax1 gives
+  regularization effect.
+- Since the development of the Inception module, the authors and the others have built another versions of this network.
+  Like inception v2, v3, and v4. Also there is a network that has used the inception module and the ResNet together.
+
+
+# Mobile Net
+
+ **Motivation for Mobile Net**
+-	Low computational cost at deployment
+-	Useful for mobile and embedded vision application
+-	Key idea: Normal vs Depthwise- separable convolutions
+- Normal Convolutions
+  - Nx * nx * nc(6 * 6 * 3)  >> filter( 3*3*)  f * f * nc = (4 *  4 * 5)
+
+  - Computational Cost( 2160)  = (3  * 3 * 3 ) filter parameters    *  (4 * 4) filter position    * (5) number of filters
+- Depth wise Seprable Convolution
+   - Each filter seprable will be multiply to one of the input channel
+   - nx * nx * nc convolve 3*3(filter) >>  nout * nout * nc
+   - Computational Cost( 432)  = (3  * 3  ) filter parameters    *  (4 * 4) filter position    * (3) number of filters
+   - There's one more step, which is, we need to take this 4 by 4 by 3 intermediate value and carry out one more step. 
+- Point Wise Convolution
+  - (n out  * n out * nc ) Convolve (1*1*nc(3)) >> when nc' is   five filters we get >> (4 * 4 * 5)
+  -  Computational Cost( 240)  = (1 * 1 * 3 ) filter parameters    *  (4 * 4) filter position    * (5) number of filters 
+- Cost Summary
+  - Cost of Normal convolution = 2160
+  - Cost of Depth wise seperarbel convoultion
+      - Depth wise = 432
+      - poit wise = 240
+      - Total 432 + 240 = 672
+  - 672 / 2160 = 0.31
+  -  the depthwise separable convolution was about 31 percent as computationally expensive as the normal convolution, roughly 3x savings.
+  - The Genral Ratio rule is
+    - 1/nc' + 1/f^2
+    - In our example >>  1/5 + 1/9 = 0.31
+    - Normally the input channel are much bigger
+    - For instance if you have 512 then
+    - 1/512 + 1/9
+ - the depthwise separable convolution rougly 10 times cheaper in computational costs
+
