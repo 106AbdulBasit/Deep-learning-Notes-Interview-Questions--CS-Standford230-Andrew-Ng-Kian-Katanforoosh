@@ -237,4 +237,4 @@
     - For instance if you have 512 then
     - 1/512 + 1/9
  - the depthwise separable convolution rougly 10 times cheaper in computational costs
-
+ 
