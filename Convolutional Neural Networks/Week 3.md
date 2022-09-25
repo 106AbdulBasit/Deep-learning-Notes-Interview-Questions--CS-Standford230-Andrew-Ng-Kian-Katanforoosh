@@ -315,7 +315,7 @@ Motivation for Unet
 - If the car then pixel = 1
 - if the not car  then pixel = 0
 - If you have more class then more class labels
-- 1[PP](https://raw.githubusercontent.com/106AbdulBasit/Deep-learning-Notes-Interview-Questions--CS-Standford230-Andrew-Ng-Kian-Katanforoosh/main/Images/Perpixelclasslabel.PNG)
+- ![PP](https://raw.githubusercontent.com/106AbdulBasit/Deep-learning-Notes-Interview-Questions--CS-Standford230-Andrew-Ng-Kian-  Katanforoosh/main/Images/Perpixelclasslabel.PNG)
 
 
 
