@@ -227,7 +227,98 @@ once for every output class.
 
 
 
- 
+ # YOLO Algorithm
+-  YOLO is a state-of-the-art object detection model that is fast and accurate
+- Lets sum up and introduce the whole YOLO algorithm given an example.
+- Suppose we need to do object detection for our autonomous driver system.It needs to identify three classes:
+  - i. Pedestrian (Walks on ground).
+  - ii. Car.
+  - iii. Motorcycle.
+- We decided to choose two anchor boxes, a taller one and a wide one.
+  - Like we said in practice they use five or more anchor boxes hand made or generated using k-means.
+- Our labeled Y shape will be [Ny, HeightOfGrid, WidthOfGrid, 16] , where Ny is number of instances and each row (of
+  size 16) is as follows:
+  - [Pc, bx, by, bh, bw, c1, c2, c3, Pc, bx, by, bh, bw, c1, c2, c3]
+- Your dataset could be an image with a multiple labels and a rectangle for each label, we should go to your dataset and
+make the shape and values of Y like we agreed.
+- An example:
+  - ![image](https://user-images.githubusercontent.com/36159918/192146209-c9c6608c-d900-4b0e-adc3-306402b8ac17.png)
+
+- We first initialize all of them to zeros and ?, then for each label and rectangle choose its closest grid point then the
+shape to fill it and then the best anchor point based on the IOU. so that the shape of Y for one image should be
+[HeightOfGrid, WidthOfGrid,16]
+- Train the labeled images on a Conv net. you should receive an output of [HeightOfGrid, WidthOfGrid,16] for our case.
+- To make predictions, run the Conv net on an image and run Non-max suppression algorithm for each class you have in
+  our case there are 3 classes.
+- You could get something like that:
+  - ![image](https://user-images.githubusercontent.com/36159918/192146250-8ef523d7-72f2-426d-b5f6-0ea245256a8e.png)
+
+  - Total number of generated boxes are grid_width * grid_height * no_of_anchors = 3 x 3 x 2
+- By removing the low probability predictions you should have:
+  - ![image](https://user-images.githubusercontent.com/36159918/192146278-6aeb84a4-ba5e-4445-a703-fe0f7209e4c8.png)
+
+  - Then get the best probability followed by the IOU filtering:
+    - ![image](https://user-images.githubusercontent.com/36159918/192146295-29675082-ac37-4df8-96c3-61fc4121a0cd.png)
+
+- YOLO9000 Better, faster, stronger
+  Summary
+  - You can find implementations for YOLO here:
+    - [https://github.com/allanzelener/YAD2K](https://github.com/allanzelener/YAD2K)
+    - [https://github.com/thtrieu/darkflow](https://github.com/thtrieu/darkflow)
+    - [https://pjreddie.com/darknet/yolo/](https://pjreddie.com/darknet/yolo/)
+
+
+# Region Proposals (R-CNN)
+- R-CNN is an algorithm that also makes an object detection.
+- Yolo tells that its faster:
+  - Our model has several advantages over classifier-based systems. It looks at the whole image at test time so its
+    predictions are informed by global context in the image. It also makes predictions with a single network
+    evaluation unlike systems like R-CNN which require thousands for a single image. This makes it extremely fast,
+    more than 1000x faster than R-CNN and 100x faster than Fast R-CNN. See our paper for more details on the
+    full system.
+- But one of the downsides of YOLO that it process a lot of areas where no objects are present.
+- R-CNN stands for regions with Conv Nets.
+- R-CNN tries to pick a few windows and run a Conv net (your confident classifier) on top of them.
+- The algorithm R-CNN uses to pick windows is called a segmentation algorithm. Outputs something like this:
+  - ![image](https://user-images.githubusercontent.com/36159918/192146834-c34fdfad-965d-4b07-9235-0c814576cce9.png)
+
+- If for example the segmentation algorithm produces 2000 blob then we should run our classifier/CNN on top of these
+  blobs.
+-  There has been a lot of work regarding R-CNN tries to make it faster:
+  - R-CNN
+    - Propose regions. Classify proposed regions one at a time. Output label + bounding box.
+    - Downside is that its slow.
+  - Fast R-CNN:
+    - Propose regions. Use convolution implementation of sliding windows to classify all the proposed regions.
+  - Faster R-CNN:
+    - Use convolutional network to propose regions.
+  - Mask RCN
+- Most of the implementation of faster R-CNN are still slower than YOLO.
+- Andrew Ng thinks that the idea behind YOLO is better than R-CNN because you are able to do all the things in just one
+   time instead of two times.
+- Other algorithms that uses one shot to get the output includes SSD and MultiBox.
+- R-FCN is similar to Faster R-CNN but more efficient.
+
+# Semantic Segmentation with U-Net
+![obvssm](https://raw.githubusercontent.com/106AbdulBasit/Deep-learning-Notes-Interview-Questions--CS-Standford230-Andrew-Ng-Kian-Katanforoosh/main/Images/Object%20Detection%20vs%20semenantic.PNG)
+- an object detection algorithm, the goal may be to draw bounding boxes like these around the other vehicles
+- learning algorithm to figure out what is every single pixel in this image, then you may use a semantic segmentation algorithm
+
+Motivation for Unet
+- ![Motivatio](https://raw.githubusercontent.com/106AbdulBasit/Deep-learning-Notes-Interview-Questions--CS-Standford230-Andrew-Ng-Kian-Katanforoosh/main/Images/MotivationforUnet.PNG)
+- This segmentation can make it easier to spot irregularities and diagnose serious diseases and also help surgeons with planning out surgeries
+-  learning algorithm can segment out the tumor automatically; this saves radiologists 
+
+**Pixel Per Pixel Class Label*
+
+-job of the segmentation algorithm of the unit algorithm will be to output, either one or zero for every single pixel in this image 
+- If the car then pixel = 1
+- if the not car  then pixel = 0
+- If you have more class then more class labels
+- 1[PP](https://raw.githubusercontent.com/106AbdulBasit/Deep-learning-Notes-Interview-Questions--CS-Standford230-Andrew-Ng-Kian-Katanforoosh/main/Images/Perpixelclasslabel.PNG)
+
+
+
 
 
 
