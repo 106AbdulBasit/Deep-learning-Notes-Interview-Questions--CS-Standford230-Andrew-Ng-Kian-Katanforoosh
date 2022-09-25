@@ -160,4 +160,74 @@ height of the filter is the same as the width and height of the input.
 - In the next sections we will see some ideas that can make the YOLO algorithm better.
 
 
+# Intersection Over Union
+- Intersection Over Union is a function used to evaluate the object detection algorithm.
+- It computes size of intersection and divide it by the union. More generally, IoU is a measure of the overlap between two
+  bounding boxes.
+- For example:
+  ![image](https://user-images.githubusercontent.com/36159918/192140001-2348a7d4-156b-484e-b31f-48880c51516f.png)
+  - The red is the labeled output and the purple is the predicted output.
+  - To compute Intersection Over Union we first compute the union area of the two rectangles which is "the first
+    rectangle + second rectangle" Then compute the intersection area between these two rectangles.
+  - Finally IOU = intersection area / Union area
+ - If IOU >=0.5 then its good. The best answer will be 1.
+ - The higher the IOU the better is the accuracy.
+
+
+# Non-max Suppression
+- One of the problems we have addressed in YOLO is that it can detect an object multiple times.
+- Non-max Suppression is a way to make sure that YOLO detects the object just once.
+ For example:
+  ![image](https://user-images.githubusercontent.com/36159918/192140057-028f4b21-243e-4c93-b365-4cb26924d43b.png)
+- Each car has two or more detections with different probabilities. This came from some of the grids that thinks that
+ this is the center point of the object.
+ 
+ - Non-max suppression algorithm:
+  - i. Lets assume that we are targeting one class as an output class.
+  - ii. Y shape should be [Pc, bx, by, bh, hw] Where Pc is the probability if that object occurs.
+  - iii. Discard all boxes with Pc < 0.6
+  - iv. While there are any remaining boxes:
+  - Pick the box with the largest Pc Output that as a prediction.
+    b. Discard any remaining box with IoU > 0.5 with that box output in the previous step i.e any box with high
+    overlap(greater than overlap threshold of 0.5).
+  - If there are multiple classes/object types c you want to detect, you should run the Non-max suppression c times,
+once for every output class.
+
+**Question how does the box made when we have 19*19 grid** 
+
+
+# Anchor Boxes
+
+- In YOLO, a grid only detects one object. What if a grid cell wants to detect multiple object?
+  ![image](https://user-images.githubusercontent.com/36159918/192140148-907fcfcb-7a90-4da0-a375-efa669185989.png)
+- Car and person grid is same here.
+- In practice this happens rarely
+
+- The idea of Anchor boxes helps us solving this issue.
+- If Y = [Pc, bx, by, bh, bw, c1, c2, c3] Then to use two anchor boxes like this:
+  - Y = [Pc, bx, by, bh, bw, c1, c2, c3, Pc, bx, by, bh, bw, c1, c2, c3] We simply have repeated the one anchor
+    Y.
+  - The two anchor boxes you choose should be known as a shape:
+  - ![image](https://user-images.githubusercontent.com/36159918/192140192-cdf2e379-5e22-484d-bbb4-7f4700388284.png)
+
+- So Previously, each object in training image is assigned to grid cell that contains that object's midpoint.
+- With two anchor boxes, Each object in training image is assigned to grid cell that contains object's midpoint and anchor
+  box for the grid cell with highest IoU. You have to check where your object should be based on its rectangle closest to
+  which anchor box.
+- Example of data:
+  - ![image](https://user-images.githubusercontent.com/36159918/192140224-0c20b983-463a-486e-8d8f-0318b98a3554.png)
+
+  - Where the car was near the anchor 2 than anchor 1.
+  - You may have two or more anchor boxes but you should know their shapes.
+- how do you choose the anchor boxes and people used to just choose them by hand. Maybe five or ten anchor box
+  shapes that spans a variety of shapes that cover the types of objects you seem to detect frequently.
+  You may also use a k-means algorithm on your dataset to specify that.
+- Anchor boxes allows your algorithm to specialize, means in our case to easily detect wider images or taller ones.
+
+
+
+
+ 
+
+
 
