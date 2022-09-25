@@ -318,6 +318,60 @@ Motivation for Unet
 - ![PP](https://raw.githubusercontent.com/106AbdulBasit/Deep-learning-Notes-Interview-Questions--CS-Standford230-Andrew-Ng-Kian-  Katanforoosh/main/Images/Perpixelclasslabel.PNG)
 
 
+# Transpose Convolution
+- How do you take a two-by-two inputs and blow it up into a four- by-four-dimensional output?
+- Normal Convolution
+  - input a six by six by three image, convolve that with a set of, say, three by three by three filters and if you have five of these, then you end up with an         output that is four by four by five.
+- Transpose Convolution:
+  -  two-by-two Convolve  three by three filter >> output that is 4 * 4
+  -  Output is bigger than the input
+
+- Lts look at the example
+  -  suppose we have 2 * 2 input and we want output 4 * 4
+  -  filter of 3 * 3 , padding of p =1 and stride = 2
+  -   In the regular convolution, you would take the filter and place it on top of the inputs and then multiply and sum up.
+  -    In the transpose convolution, instead of placing the filter on the input, you would instead place a filter on the output
+  -   Take the uper left value of the input and multiply it with the filter
+  -   Now putt the  3 * 3 kernel in th output of 4 * 4 , Ignore the padding portion and put the reset
+  -   Look at the following image this is fist step
+      - ![step1](https://raw.githubusercontent.com/106AbdulBasit/Deep-learning-Notes-Interview-Questions--CS-Standford230-Andrew-Ng-Kian-Katanforoosh/main/Images/transposeconv1.PNG)
+  - Step 2:
+    - Take the second value convolve it with teh filter.
+    - Now we have stride of 2 we will shift for two rows
+    - ignore the padding part
+    - You may notice that some values over lap ,We will add the values
+    - ![step2](https://raw.githubusercontent.com/106AbdulBasit/Deep-learning-Notes-Interview-Questions--CS-Standford230-Andrew-Ng-Kian-Katanforoosh/main/Images/transposeconv2.PNG)
+  - repeat for other parts as well
+  - Now you have the 4 * 4 output
+  -  the transpose convolution happens to be one that is effective and when you learn all the parameters of the filter here
+
+
+# U-Net Architecture Intuition
+![skipsme](https://raw.githubusercontent.com/106AbdulBasit/Deep-learning-Notes-Interview-Questions--CS-Standford230-Andrew-Ng-Kian-Katanforoosh/main/Images/Semantic%20seg%20skip.PNG)
+-  lost a lot of spatial information because the dimension is much smaller, but it's much deeper.
+-   that skip connections from the earlier layers to the later layers like this. So that this earlier block of activations is copied directly to this later block.
+-   And so this way deeper layer of the decov layer has both the lower resolution, but high level, spatial, high level contextual information, as well as the low       level.
+
+
+# U-Net Architecture
+
+![unet](https://raw.githubusercontent.com/106AbdulBasit/Deep-learning-Notes-Interview-Questions--CS-Standford230-Andrew-Ng-Kian-Katanforoosh/main/Images/Unet%20aechitecture.PNG)
+
+- it's called a unit, because when you draw it like this, it looks a lot like a U.
+- the original unit paper, they were thinking of the application of biomedical image segmentation, really segmenting medical images. But these ideas turned out to     be useful for many other computer vision
+- The first half is  a simple neural netrwork with  feed forward.
+- We're going to use Max pooling to reduce the height and width. So maybe you end up with a set of activations where the height and width is lower, but maybe a      sticker, so the number of channels is increasing
+- In convolution we will reduce the height a increase the number of channels
+- The second half is consist of transpose convolution
+-  What the skip connection does is it takes this set of activations and just copies it over to the right. And so the set of activations you end up with is like       this
+-  In transpose we will expand the height and width
+-  to take this and map this to our segmentation map,
+-  going to use a one by one convolution 
+-  the dimensions of this output layer is going to be h by w, so the same dimensions as our original input by num classes.
+-  what this does is for every one of your pixels you have h by w pixels you have, an array or a vector, essentially of n classes numbers that tells you for our        pixel how likely is that pixel to come from each of these different classes. And if you take a arg max over these n classes, then that's how you classify each of     the pixels into one of the classes, and you can visualize it like the segmentation map showing on the right
+-  
+
+
 
 
 
