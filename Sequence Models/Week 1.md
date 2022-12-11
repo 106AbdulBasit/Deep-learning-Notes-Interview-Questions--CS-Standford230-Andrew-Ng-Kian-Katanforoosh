@@ -65,4 +65,27 @@ search online for m most occurrent words.
   - We can add a token in the vocabulary with name <UNK> which stands for unknown text and use its index for
 your one-hot
 - Full example:
-  - 
+  - ![image](https://user-images.githubusercontent.com/36159918/206914302-aee96bea-20bd-4dab-87b1-95e6065bc157.png)
+  - The goal is given this representation for x to learn a mapping using a sequence model to then target output y as a
+supervised learning problem
+- Why not to use a standard network for sequence tasks? There are two problems:
+  - Inputs, outputs can be different lengths in different examples.
+  - This can be solved for normal NNs by paddings with the maximum lengths but it's not a good solution.
+- Doesn't share features learned across different positions of text/sequence.
+  - Using a feature sharing like in CNNs can significantly reduce the number of parameters in your model. That's
+    what we will do in RNNs.
+- Recurrent neural network doesn't have either of the two mentioned problems.
+- Lets build a RNN that solves name entity recognition task:
+  - ![image](https://user-images.githubusercontent.com/36159918/206914391-ec1e1473-e9ed-48a3-903a-e4509dd56e91.png)
+      - In this problem T = T . In other problems where they aren't equal, the RNN architecture may be different.
+      - a is usually initialized with zeros, but some others may initialize it randomly in some cases.
+      - There are three weight matrices here: W , W , and W with shapes:
+        - W : (NoOfHiddenNeurons, n )
+        - W : (NoOfHiddenNeurons, NoOfHiddenNeurons)
+        - W : (n , NoOfHiddenNeurons)
+      - The weight matrix W is the memory the RNN is trying to maintain from the previous layers.
+      - A lot of papers and books write the same architecture this way:
+  - ![image](https://user-images.githubusercontent.com/36159918/206914489-8ee595ce-4129-4261-9647-2af5a74b321c.png)
+    - It's harder to interpreter. It's easier to roll this drawings to the unrolled version.
+
+
