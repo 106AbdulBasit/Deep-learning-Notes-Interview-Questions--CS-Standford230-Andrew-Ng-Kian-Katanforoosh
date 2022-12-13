@@ -276,6 +276,116 @@ gradient vector so that is not too big. So there are cliped according to some ma
       - Most popular.
       - We will discuss it next.
 
+  # Gated Recurrent Unit (GRU)
+  
+  - GRU is an RNN type that can help solve the vanishing gradient problem and can remember the long-term
+    dependencies
+  - The basic RNN unit can be visualized to be like this:
+    ![image](https://user-images.githubusercontent.com/36159918/207298852-facfc7ad-6308-41f9-a6a7-2017ab6fbd7a.png)
+  - We will represent the GRU with a similar drawings.
+  - Each layer in GRUs has a new variable C which is the memory cell. It can tell to whether memorize something or not.
+  - Equations of the GRUs:
+   - ![image](https://user-images.githubusercontent.com/36159918/207299070-0dd0a3fe-e117-40f8-8127-781ca0b3c564.png)
+
+    - The update gate is between 0 and 1
+       - To understand GRUs imagine that the update gate is either 0 or 1 most of the time.
+  -  So we update the memory cell based on the update cell and the previous cell.
+  
+  - Lets take the cat sentence example and apply it to understand this equations
+     - Sentence: "The cat, which already ate ........................, was full"
+     - We will suppose that U is 0 or 1 and is a bit that tells us if a singular word needs to be memorized
+     - Splitting the words and get values of C and U at each place
+  - ![Capture](https://user-images.githubusercontent.com/36159918/207300075-ad401a1d-ce24-4326-a80f-b79f12d7dd8f.PNG)
+  -  Drawing for the GRUs
+  - ![image](https://user-images.githubusercontent.com/36159918/207300201-59defaed-9c18-49dc-9464-cae30bbad6cb.png)
+
+    - Drawings like in http://colah.github.io/posts/2015-08-Understanding-LSTMs/ is so popular and makes it easier to
+      understand GRUs and LSTMs. But Andrew Ng finds it's better to look at the equations.
+  
+ - Because the update gate U is usually a small number like 0.00001, GRUs doesn't suffer the vanishing gradient problem.
+  - In the equation this makes C = C<t-1> in a lot of cases.
+- Shapes:
+  - a shape is (NoOfHiddenNeurons, 1)
+  - c is the same as a <t>
+  - c ~<t> is the same as
+  - u<t> is also the same dimensions of a <t>
+  - The multiplication in the equations are element wise multiplication.
+  - What has been descried so far is the Simplified GRU unit. Let's now describe the full one:
+  - The full GRU contains a new gate that is used with to calculate the candidate C. The gate tells you how relevant is
+    C <t-1> to C<t>
+  - Equations:
+  -  ![image](https://user-images.githubusercontent.com/36159918/207306497-0a445701-e24a-4fa1-a35f-e06e40e23337.png)
+
+  - Shapes are the same
+  - So why we use these architectures, why don't we change them, how we know they will work, why not add another gate,
+    why not use the simpler GRU instead of the full GRU; well researchers has experimented over years all the various types
+    of these architectures with many many different versions and also addressing the vanishing gradient problem. They have
+    found that full GRUs are one of the best RNN architectures to be used for many different problems. You can make your
+    design but put in mind that GRUs and LSTMs are standards.
+  
+  # Long Short Term Memory (LSTM)
+  - LSTM - the other type of RNN that can enable you to account for long-term dependencies. It's more powerful and
+    general than GRU.
+  - In LSTM , C != a
+  - Here are the equations of an LSTM unit:
+   - ![image](https://user-images.githubusercontent.com/36159918/207307033-85b90cf1-4e85-4902-b1ee-54d327b542e7.png)
+ 
+  - In GRU we have an update gate U , a relevance gate r , and a candidate cell variables C while in LSTM we have an
+update gate U (sometimes it's called input gate I), a forget gate F , an output gate O , and a candidate cell variables C
+  
+  - Drawings (inspired by http://colah.github.io/posts/2015-08-Understanding-LSTMs/):
+  - ![image](https://user-images.githubusercontent.com/36159918/207307189-bb402d06-5fc6-469b-8b69-f67992840dc6.png)
+
+  - Some variants on LSTM includes:
+    - LSTM with peephole connections.
+      - The normal LSTM with C <t-1> included with every gate.
+  - There isn't a universal superior between LSTM and it's variants. One of the advantages of GRU is that it's simpler and can
+be used to build much bigger network but the LSTM is more powerful and general.
+  
+  
+  # Bidirectional RNN
+  - There are still some ideas to let you build much more powerful sequence models. One of them is bidirectional RNNs and
+    another is Deep RNNs.
+  - As we saw before, here is an example of the Name entity recognition task:
+    - ![image](https://user-images.githubusercontent.com/36159918/207307608-345d92c5-bf9d-4fc3-b81e-4252a5207f82.png)
+
+  -  The name Teddy cannot be learned from He and said, but can be learned from bears.
+  - BiRNNs fixes this issue.
+  - Here is BRNNs architecture:
+  - ![image](https://user-images.githubusercontent.com/36159918/207307834-79884207-3b1c-40e7-89dc-e3ce36a9f02b.png)
+
+  
+  - Note, that BiRNN is an acyclic graph.
+  - Part of the forward propagation goes from left to right, and part - from right to left. It learns from both sides
+  - To make predictions we use ŷ by using the two activations that come from left and right.
+  - The blocks here can be any RNN block including the basic RNNs, LSTMs, or GRUs.
+  - For a lot of NLP or text processing problems, a BiRNN with LSTM appears to be commonly used.
+  - The disadvantage of BiRNNs that you need the entire sequence before you can process it. For example, in live speech
+    recognition if you use BiRNNs you will need to wait for the person who speaks to stop to take the entire sequence and
+    then make your predictions
+  
+  # Deep RNNs
+  - In a lot of cases the standard one layer RNNs will solve your problem. But in some problems its useful to stack some
+    RNN layers to make a deeper network.
+  - For example, a deep RNN with 3 layers would look like this:
+  
+     ![image](https://user-images.githubusercontent.com/36159918/207308296-e0c51682-c334-448b-aa8c-b03a36f2b80c.png)
+
+  - In feed-forward deep nets, there could be 100 or even 200 layers. In deep RNNs stacking 3 layers is already considered
+      deep and expensive to train.
+  - In some cases you might see some feed-forward network layers connected after recurrent cell.
+  
+  - Back propagation with RNNs
+  - In modern deep learning frameworks, you only have to implement the forward pass, and the framework takes care
+of the backward pass, so most deep learning engineers do not need to bother with the details of the backward
+pass. If however you are an expert in calculus and want to see the details of backprop in RNNs, you can work
+through this optional portion of the notebook.
+  
+  - The quote is taken from this notebook. If you want the details of the back propagation with programming notes look at
+     the linked notebook.
+  
+   
+
   
 
 
