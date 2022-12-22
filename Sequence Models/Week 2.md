@@ -256,3 +256,75 @@ use a window which means they are equal
     set of embeddings.
   - A final note that you can't guarantee that the axis used to represent the features will be well-aligned with what
     might be easily humanly interpretable axis like gender, royal, age.
+    
+  ## Applications using Word Embedding
+  
+  ### Sentiment Classification
+  - As we have discussed before, Sentiment classification is the process of finding if a text has a positive or a negative
+    review. Its so useful in NLP and is used in so many applications. An example would be:
+  - ![image](https://user-images.githubusercontent.com/36159918/209173760-44547143-53ec-4ea3-b141-f29b0aafcfe0.png)
+  - One of the challenges with it, is that you might not have a huge labeled training data for it, but using word embeddings
+     can help getting rid of this.
+  - The common dataset sizes varies from 10,000 to 100,000 words.
+  - A simple sentiment classification model would be like this:
+  - ![image](https://user-images.githubusercontent.com/36159918/209173953-4f31c422-d61a-491d-a7c5-94c65d9c2939.png)
+  - The embedding matrix may have been trained on say 100 billion words.
+  - Number of features in word embedding is 300.
+  - We can use sum or average given all the words then pass it to a softmax classifier. That makes this classifier works
+    for short or long sentences.
+  - One of the problems with this simple model is that it ignores words order. For example "Completely lacking in good
+    taste, good service, and good ambience" has the word good 3 times but its a negative review.
+  - A better model uses an RNN for solving this problem:
+  - ![image](https://user-images.githubusercontent.com/36159918/209174376-bfbd335c-4c85-4036-b8bc-cc41674b60e4.png)
+    - And so if you train this algorithm, you end up with a pretty decent sentiment classification algorithm.
+    - Also, it will generalize better even if words weren't in your dataset. For example you have the sentence "Completely
+      absent of good taste, good service, and good ambience", then even if the word "absent" is not in your label training
+      set, if it was in your 1 billion or 100 billion word corpus used to train the word embeddings, it might still get this
+      right and generalize much better even to words that were in the training set used to train the word embeddings but
+      not necessarily in the label training set that you had for specifically the sentiment classification problem.
+   
+   ## Debiasing word embeddings
+    - We want to make sure that our word embeddings are free from undesirable forms of bias, such as gender bias, ethnicity
+      bias and so on.
+    - Horrifying results on the trained word embeddings in the context of Analogies:
+      - Man : Computer_programmer as Woman : Homemaker
+      - Father : Doctor as Mother : Nurse
+    - Word embeddings can reflect gender, ethnicity, age, sexual orientation, and other biases of text used to train the model.
+    - Learning algorithms by general are making important decisions and it mustn't be biased.
+    - Andrew thinks we actually have better ideas for quickly reducing the bias in AI than for quickly reducing the bias in the
+      human race, although it still needs a lot of work to be done.
+    - Addressing bias in word embeddings steps:
+      - Idea from the paper: https://arxiv.org/abs/1607.06520
+      - Given these learned embeddings:
+      - ![image](https://user-images.githubusercontent.com/36159918/209176958-265cff67-0044-4748-8d95-ea27d30b729a.png)
+
+      - We need to solve the gender bias here. The steps we will discuss can help solve any bias problem but we are
+        focusing here on gender bias.
+      -  Here are the steps:
+          - a Identify the direction:
+            - Calculate the difference between:
+            - e_he - e_she
+            - e_male - e_female
+            - Choose some k differences and average them.
+            - This will help you find this:
+            - ![image](https://user-images.githubusercontent.com/36159918/209177868-83d1eb80-8093-4f0f-a626-454f86c9bedb.png)
+
+            - By that we have found the bias direction which is 1D vector and the non-bias vector which is 299D vector.
+          - b. Neutralize: For every word that is not definitional, project to get rid of bias.
+            - Babysitter and doctor need to be neutral so we project them on non-bias axis with the direction of the bias:
+            - ![image](https://user-images.githubusercontent.com/36159918/209178044-29b9f52d-a384-45b9-be64-c97406731835.png)
+
+          - After that they will be equal in the term of gender. - To do this the authors of the paper trained a
+            classifier to tell the words that need to be neutralized or not.
+          - c. Equalize pairs
+            - We want each pair to have difference only in gender. Like:
+            - Grandfather - Grandmother - He - She - Boy - Girl
+            - We want to do this because the distance between grandfather and babysitter is bigger than babysitter and
+              grandmother:
+            - ![image](https://user-images.githubusercontent.com/36159918/209178355-1290656a-bc6a-4920-8a0b-b73c889883b0.png)
+            - To do that, we move grandfather and grandmother to a point where they will be in the middle of the nonbias axis.
+            - There are some words you need to do this for in your steps. Number of these words is relatively small.
+
+
+
+
