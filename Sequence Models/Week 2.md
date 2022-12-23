@@ -23,7 +23,7 @@ the word in the vocabulary.
    - Inner product between any one-hot encoding vector is zero. Also, the distances between them are the same.
 - So, instead of a one-hot presentation, won't it be nice if we can learn a featurized representation with each of these
    words: man, woman, king, queen, apple, and orange?
-- ![](![image](https://user-images.githubusercontent.com/36159918/209144344-c3502f5f-b09b-4ddf-8f5e-5e0eee6b1e8c.png))
+- ![image](https://user-images.githubusercontent.com/36159918/209144344-c3502f5f-b09b-4ddf-8f5e-5e0eee6b1e8c.png)
 - Each word will have a, for example, 300 features with a type of float point number.
   - Each word column will be a 300-dimensional vector which will be the representation.
   - We will use the notation e5391 to describe man word features vector.
@@ -35,7 +35,7 @@ the word in the vocabulary.
   - We call this representation Word embeddings.
 - To visualize word embeddings we use a t-SNE algorithm to reduce the features to 2 dimensions which makes it easy to
   visualize:
-- ![](![image](https://user-images.githubusercontent.com/36159918/209144864-9e46756c-a6da-494b-a8c8-53c5cc7b135a.png))
+- ![image](https://user-images.githubusercontent.com/36159918/209144864-9e46756c-a6da-494b-a8c8-53c5cc7b135a.png)
   - You will get a sense that more related words are closer to each other.
 - The word embeddings came from that we need to embed a unique vector inside a n-dimensional space.
 
@@ -43,7 +43,7 @@ the word in the vocabulary.
 - Let's see how we can take the feature representation we have extracted from each word and apply it in the Named
 entity recognition problem.
 - Given this example (from named entity recognition):
-- ![](![image](https://user-images.githubusercontent.com/36159918/209145534-620330b1-01b1-413e-a7ce-dbf453aab597.png))
+- ![image](https://user-images.githubusercontent.com/36159918/209145534-620330b1-01b1-413e-a7ce-dbf453aab597.png)
 - Sally Johnson is a person's name.
 - After training on this sentence the model should find out that the sentence "Robert Lin is an apple farmer" contains
   Robert Lin as a name, as apple and orange have near representations.
@@ -62,7 +62,7 @@ entity recognition problem.
   - Also, one of the advantages of using word embeddings is that it reduces the size of the input!
     - 10,000 one hot compared to 300 features vector.
   - Word embeddings have an interesting relationship to the face recognition task:
-  - ![](![image](https://user-images.githubusercontent.com/36159918/209146467-630f1840-5fb1-4c20-8ac5-4b396b5246bf.png))
+  - ![image](https://user-images.githubusercontent.com/36159918/209146467-630f1840-5fb1-4c20-8ac5-4b396b5246bf.png)
   - In this problem, we encode each face into a vector and then check how similar are these vectors.
   - Words encoding and embeddings have a similar meaning here
 - In the word embeddings task, we are learning a representation for each word in our vocabulary (unlike in image
@@ -76,7 +76,7 @@ entity recognition problem.
   these word embeddings can do.
 - Analogies example:
   - Given this word embeddings table:
-  - ![](![image](https://user-images.githubusercontent.com/36159918/209147030-c8fa80ac-d789-419a-9803-0cb9abb5d8a1.png))
+  - ![image](https://user-images.githubusercontent.com/36159918/209147030-c8fa80ac-d789-419a-9803-0cb9abb5d8a1.png)
 - Can we conclude this relation:
   - Man ==> Woman
   - King ==> ??
@@ -91,7 +91,7 @@ just for visualization. Don't rely on the t-SNE algorithm for finding parallels.
 - So we can reformulate the problem to find:
   - eman - eWoman ≈ eking - e??
   - It can also be represented mathematically by:
-  - ![](![image](https://user-images.githubusercontent.com/36159918/209147819-61e8795d-c766-4710-a69a-d0441b24a905.png)
+  - ![image](https://user-images.githubusercontent.com/36159918/209147819-61e8795d-c766-4710-a69a-d0441b24a905.png)
   - It turns out that eQueen is the best solution here that gets the the similar vector
 
 - Cosine similarity - the most commonly used similarity function:
@@ -112,7 +112,7 @@ just for visualization. Don't rely on the t-SNE algorithm for finding parallels.
 - Let's take an example:
   - Suppose we are using 10,000 words as our vocabulary (plus token).
   - The algorithm should create a matrix E of the shape (300, 10000) in case we are extracting 300 features.
-  - ![](![image](https://user-images.githubusercontent.com/36159918/209148784-352886b5-1c6d-4746-8c49-2da7daa6fe07.png)
+  - ![image](https://user-images.githubusercontent.com/36159918/209148784-352886b5-1c6d-4746-8c49-2da7daa6fe07.png)
   - If O6257 is the one hot encoding of the word orange of shape (10000, 1), then
   - np.dot( E ,O6257 ) = e6257 which shape is (300, 1).
   - Generally np.dot( E , O ) =ej
