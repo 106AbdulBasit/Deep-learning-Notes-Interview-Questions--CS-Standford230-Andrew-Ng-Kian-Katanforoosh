@@ -13,7 +13,7 @@ between words like "king" and "queen".
 - So far we have defined our language by a vocabulary. Then represented our words with a one-hot vector that represents
 the word in the vocabulary.
   - An image example would be:
-  - ![](![image](https://user-images.githubusercontent.com/36159918/209143893-e7269ddf-8b4d-4c18-9175-f2e9621b44c0.png))
+  - ![image](https://user-images.githubusercontent.com/36159918/209143893-e7269ddf-8b4d-4c18-9175-f2e9621b44c0.png)
   - We will use the annotation O for any word that is represented with one-hot like in the image.
   - One of the weaknesses of this representation is that it treats a word as a thing that itself and it doesn't allow an
     algorithm to generalize across words.
